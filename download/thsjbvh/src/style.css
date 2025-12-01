@@ -1,0 +1,14 @@
+.mr-b0 {margin-bottom: 0;}
+.mr-b5 {margin-bottom: 5px;}
+.mr-b15 {margin-bottom: 15px;}
+
+.mr-t15 {margin-top: 15px;}
+.mr-t8 {margin-top: 8px;}
+.mr-t12{margin-top: 12px;}
+
+.flex{display: flex;}
+.justify-center{justify-content: center;}
+
+.w100pre{width: 100%;}
+
+.app-container{padding: 20px;}

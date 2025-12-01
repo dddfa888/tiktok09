@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="project.blockchain.UserBank" table="T_MALL_USER_BANK">
+
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+
+        <property name="partyId" type="java.lang.String">
+            <column name="PARTY_ID" />
+        </property>
+        <property name="bankName" type="java.lang.String">
+            <column name="BANK_NAME" />
+        </property>
+
+        <property name="accountName" type="java.lang.String">
+            <column name="ACCOUNT_NAME" />
+        </property>
+
+        <property name="cardNo" type="java.lang.String">
+            <column name="CARD_NO" />
+        </property>
+
+        <property name="status" type="java.lang.Integer">
+            <column name="STATUS" />
+        </property>
+
+        <property name="createTime" type="java.time.LocalDateTime">
+            <column name="CREATE_TIME" />
+        </property>
+
+    </class>
+</hibernate-mapping>

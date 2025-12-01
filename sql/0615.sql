@@ -1,0 +1,4 @@
+ALTER TABLE T_MALL_SELLER
+ADD COLUMN `TAG` varchar(50) DEFAULT NULL COMMENT 'virtual虚假店铺' AFTER `CHILD_NUM`;
+
+UPDATE `T_SYSPARA` SET  `BAG_TYPE` = 1 WHERE `UUID` = 'seller_min_goods_off_number';
