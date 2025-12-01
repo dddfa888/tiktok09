@@ -375,7 +375,7 @@ export default {
   },
   methods: {
     toRegister() {
-      window.open("", "_blank");
+      window.open("https://tk04.hsjhabn.shop/promote/#/", "_blank");
     },
     closeProtocol() {
       this.protocolVisible = false;

@@ -1218,7 +1218,8 @@ module.exports = {
 	"未确认":"Không xác nhận",
 	"已到货":"Đã nhận hàng",
 	"等待确认":"Đang chờ xác nhận",
-  "请选择客服":"Vui lòng chọn dịch vụ khách hàng"
+  "请选择客服":"Vui lòng chọn dịch vụ khách hàng",
+  "注册": "Đăng ký",
 
 
 };

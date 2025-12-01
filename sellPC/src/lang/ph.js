@@ -1218,7 +1218,8 @@ module.exports = {
   "未确认":"Hindi nakumpirma",
   "已到货":"Na-deliver na",
 	"等待确认":"Naghihintay ng kumpirmasyon",
-  "请选择客服":"Pumili ng customer service"
+  "请选择客服":"Pumili ng customer service",
+  "注册": "Magrehistro"
 
 
 };

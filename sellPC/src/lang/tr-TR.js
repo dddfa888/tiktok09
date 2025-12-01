@@ -1209,6 +1209,7 @@ module.exports = {
 	"未确认":"Onaylanmamış değil",
 	"已到货":"Teslimat",
 	"等待确认":"Onay onayı",
-  "请选择客服":"Lütfen müşteri hizmetleri seçin"
+  "请选择客服":"Lütfen müşteri hizmetleri seçin",
+  "注册": "Kayıt Ol",
 
 };

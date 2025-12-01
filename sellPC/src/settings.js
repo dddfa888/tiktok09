@@ -1,16 +1,1 @@
-module.exports = {
-  projectTitle: "tikTok",
-  baseUrl: "https://wlshop.vip/wap/",
-  showSettings: true,
-  hideContact: false,
-  countryCode: "44",
-  tagsView: true,
-  fixedHeader: false,
-  sidebarLogo: false,
-  errorLog: "production",
-  hideCertificationPhoto: false,
-  hideSellerLevel: false,
-  hideUpdateLoginPassword: false,
-  hideUpdatePayPassword: false,
-  hideLoginProtocol: false,
-};
+module.exports={"projectTitle":"TikTok","baseUrl":"https://wlshop.vip/wap/","showSettings":true,"hideContact":false,"countryCode":"44","tagsView":true,"fixedHeader":false,"sidebarLogo":false,"errorLog":"production","hideCertificationPhoto":false,"hideSellerLevel":false,"hideUpdateLoginPassword":false,"hideUpdatePayPassword":false,"hideLoginProtocol":false}
