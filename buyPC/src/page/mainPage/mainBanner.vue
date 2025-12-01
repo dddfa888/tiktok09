@@ -5,7 +5,7 @@
         <div class="main-banner-left" v-loading="loading">
           <swiper :options="swiperOptions1">
             <swiper-slide v-for="item in filterBanner" :key="item.id">
-              <img :src="item?.imgUrl" alt="" @click="goLink(item.link)" />
+              <img :src="item?.imgUrl" alt @click="goLink(item.link)" />
             </swiper-slide>
           </swiper>
         </div>
@@ -14,37 +14,25 @@
         <div class="main-banner-right flex-start" v-loading="loading">
           <div class="main-banner-right-group">
             <swiper :options="swiperOptions2">
-              <swiper-slide
-                v-for="(item, idx) in leftBanner.slice(0, 2)"
-                :key="idx"
-              >
+              <swiper-slide v-for="(item, idx) in leftBanner.slice(0, 2)" :key="idx">
                 <img :src="item?.imgUrl" @click="goLink(item.link)" />
               </swiper-slide>
             </swiper>
             <swiper :options="swiperOptions3">
-              <swiper-slide
-                v-for="(item, idx) in leftBanner.slice(2, 4)"
-                :key="idx"
-              >
-                <img :src="item?.imgUrl" alt="" @click="goLink(item.link)" />
+              <swiper-slide v-for="(item, idx) in leftBanner.slice(2, 4)" :key="idx">
+                <img :src="item?.imgUrl" alt @click="goLink(item.link)" />
               </swiper-slide>
             </swiper>
           </div>
           <div class="main-banner-right-group">
             <swiper :options="swiperOptions2">
-              <swiper-slide
-                v-for="(item, idx) in leftBanner.slice(4, 6)"
-                :key="idx"
-              >
-                <img :src="item?.imgUrl" alt="" @click="goLink(item.link)" />
+              <swiper-slide v-for="(item, idx) in leftBanner.slice(4, 6)" :key="idx">
+                <img :src="item?.imgUrl" alt @click="goLink(item.link)" />
               </swiper-slide>
             </swiper>
             <swiper :options="swiperOptions3">
-              <swiper-slide
-                v-for="(item, idx) in leftBanner.slice(6, 8)"
-                :key="idx"
-              >
-                <img :src="item?.imgUrl" alt="" @click="goLink(item.link)" />
+              <swiper-slide v-for="(item, idx) in leftBanner.slice(6, 8)" :key="idx">
+                <img :src="item?.imgUrl" alt @click="goLink(item.link)" />
               </swiper-slide>
             </swiper>
           </div>
@@ -61,43 +49,43 @@ export default {
   name: "mainBanner",
   data() {
     return {
-      banner1: require("@/assets/image/banner/banner-1.jpeg"),
+      banner1: require("@/assets/image/banner/banner-1.jpg"),
       banner2: require("@/assets/image/banner/banner2.jpeg"),
       banner3: require("@/assets/image/banner/banner3.jpeg"),
-      banner4: require("@/assets/image/banner/right1.jpeg"),
-      banner5: require("@/assets/image/banner/right2.jpeg"),
-      banner6: require("@/assets/image/banner/right3.jpeg"),
-      banner7: require("@/assets/image/banner/right4.jpeg"),
-      banner8: require("@/assets/image/banner/right5.jpeg"),
-      banner9: require("@/assets/image/banner/right6.jpeg"),
-      banner10: require("@/assets/image/banner/right8.jpeg"),
+      banner4: require("@/assets/image/banner/banner-1.jpg"),
+      banner5: require("@/assets/image/banner/right2.jpg"),
+      banner6: require("@/assets/image/banner/right3.jpg"),
+      banner7: require("@/assets/image/banner/right4.jpg"),
+      banner8: require("@/assets/image/banner/right5.jpg"),
+      banner9: require("@/assets/image/banner/right6.jpg"),
+      banner10: require("@/assets/image/banner/right8.jpg"),
       loading: false,
       swiperOptions1: {
         autoplay: {
           delay: 4500,
-          loop:false,
+          loop: false,
           disableOnInteraction: false,
-          roundLengths: true,
-        },
+          roundLengths: true
+        }
       },
       swiperOptions2: {
         autoplay: {
           delay: 4500,
-          loop:false,
+          loop: false,
           disableOnInteraction: false,
-          roundLengths: true,
-        },
+          roundLengths: true
+        }
       },
       swiperOptions3: {
         autoplay: {
           delay: 4500,
-          loop:false,
+          loop: false,
           disableOnInteraction: false,
-          roundLengths: true,
-        },
+          roundLengths: true
+        }
       },
       filterBanner: [],
-      leftBanner: [],
+      leftBanner: []
     };
   },
 
@@ -116,54 +104,54 @@ export default {
         pageNum: 1,
         pageSize: 8,
         type: "pc",
-        imgType: 1,
+        imgType: 1
       });
       if (res.data.result.length >= 1) {
         this.filterBanner = res.data.result;
       } else {
         this.filterBanner = [
           {
-            imgUrl: this.banner1,
+            imgUrl: this.banner1
           },
           {
-            imgUrl: this.banner2,
+            imgUrl: this.banner2
           },
           {
-            imgUrl: this.banner3,
-          },
+            imgUrl: this.banner3
+          }
         ];
       }
       let rs = await HomeBanner({
         pageNum: 1,
         pageSize: 8,
         type: "pc",
-        imgType: 0,
+        imgType: 0
       });
       if (rs.data.result.length >= 1) {
         this.leftBanner = rs.data.result;
       } else {
         this.leftBanner = [
           {
-            imgUrl: this.banner4,
+            imgUrl: this.banner4
           },
           {
-            imgUrl: this.banner5,
+            imgUrl: this.banner5
           },
           {
-            imgUrl: this.banner6,
+            imgUrl: this.banner6
           },
           {
-            imgUrl: this.banner7,
+            imgUrl: this.banner7
           },
           {
-            imgUrl: this.banner8,
+            imgUrl: this.banner8
           },
           {
-            imgUrl: this.banner9,
+            imgUrl: this.banner9
           },
           {
-            imgUrl: this.banner10,
-          },
+            imgUrl: this.banner10
+          }
           // {
           //   imgUrl:
           //     "https://shy-shop-test.s3.amazonaws.com/PCbanner/sbanner_8.png",
@@ -171,8 +159,8 @@ export default {
         ];
       }
       this.loading = false;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -225,7 +213,7 @@ export default {
     }
   }
 }
-.swiper-slide.swiper-slide-active{
+.swiper-slide.swiper-slide-active {
   -webkit-transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) !important;
   -moz-transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) !important;
   -o-transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) !important;

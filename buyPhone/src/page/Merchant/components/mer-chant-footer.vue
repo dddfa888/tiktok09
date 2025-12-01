@@ -12,14 +12,18 @@
               <a href="JavaScript:;" @click="openUrl(1)">{{ $t("登录") }}</a>
             </li>
             <li>
-              <a href="JavaScript:;" @click="openUrl(2)">{{
+              <a href="JavaScript:;" @click="openUrl(2)">
+                {{
                 $t("收藏商品")
-              }}</a>
+                }}
+              </a>
             </li>
             <li>
-              <a href="JavaScript:;" @click="openUrl(3)">{{
+              <a href="JavaScript:;" @click="openUrl(3)">
+                {{
                 $t("购买记录")
-              }}</a>
+                }}
+              </a>
             </li>
             <li>
               <a href="JavaScript:;" @click="openUrl(4)">{{ $t("帐户") }}</a>
@@ -41,9 +45,9 @@
         <p>{{ $t("版权所有© 2019-2022 SHOP PO, LLC. 版权所有") }}</p>
         <p>
           {{
-            $t(
-              "使用本网站，即表示您同意其服务条款（禁止将本网站上的任何信息用于商业用途）及其隐私政策。 当您使用我们的一个链接进行购买时，我们可能会赚取佣金。"
-            )
+          $t(
+          "使用本网站，即表示您同意其服务条款（禁止将本网站上的任何信息用于商业用途）及其隐私政策。 当您使用我们的一个链接进行购买时，我们可能会赚取佣金。"
+          )
           }}
         </p>
       </div>
@@ -58,11 +62,11 @@ export default {
   name: "mer-chant-footer",
   data() {
     return {
-      logo: require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.svg`),
+      logo: require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.png`)
     };
   },
   components: {
-    [Toast.name]: Toast,
+    [Toast.name]: Toast
   },
   methods: {
     openUrl(index) {
@@ -106,8 +110,8 @@ export default {
         default:
           break;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

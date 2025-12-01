@@ -375,7 +375,7 @@ export default {
           this.$store.state.multiItem[process.env.VUE_APP_ITEM_NAME].suffix
         }`);
       } else {
-        return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.svg`);
+        return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.png`);
       }
     }
   },

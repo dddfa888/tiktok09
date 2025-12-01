@@ -461,9 +461,9 @@ export default {
   computed: {
     logo() {
       if (this.itemName == "EShop") {
-        return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.svg`);
+        return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.png`);
       }
-      return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.svg`);
+      return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.png`);
       // console.log(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.png`)
     },
     classOption() {
