@@ -1,12 +1,7 @@
 <template>
   <div ref="scroll" style="min-height: 100vh">
     <div class="home">
-      <van-nav-bar
-        safe-area-inset-top
-        fixed
-        @click-left="onClickLeft"
-        @click-right="onClickRight"
-      >
+      <van-nav-bar safe-area-inset-top fixed @click-left="onClickLeft" @click-right="onClickRight">
         <div slot="left" class="logo-wrap">
           <img
             :class="['logo-img', isAr && 'top_logo_img']"
@@ -23,10 +18,7 @@
             <router-link to="/language">
               <div class="cn-wrap">
                 <img class="cn-img" :src="languageIcon" />
-                <img
-                  class="down-img"
-                  src="@/assets/image/index/down-icon.png"
-                />
+                <img class="down-img" src="@/assets/image/index/down-icon.png" />
               </div>
             </router-link>
           </template>
@@ -34,25 +26,17 @@
             <div class="new-wrap">
               <img class="tongzhi-img" src="@/assets/image/index/kefu.png" />
             </div>
-          </router-link> -->
+          </router-link>-->
 
           <!-- <router-link to="/information"> -->
           <div class="new-wrap" @click="information">
-            <van-badge
-              :content="queryMessages"
-              max="9"
-              v-if="queryMessages > 0"
-            >
+            <van-badge :content="queryMessages" max="9" v-if="queryMessages > 0">
               <img class="tongzhi-img" src="@/assets/image/index/tongzhi.png" />
             </van-badge>
-            <img
-              class="tongzhi-img"
-              v-else
-              src="@/assets/image/index/tongzhi.png"
-            />
+            <img class="tongzhi-img" v-else src="@/assets/image/index/tongzhi.png" />
             <!-- <div class="tips">
                 {{msgNum}}
-              </div> -->
+            </div>-->
           </div>
           <!-- </router-link> -->
         </div>
@@ -60,16 +44,10 @@
       <!-- 搜索 -->
       <div class="search-contain">
         <router-link to="/search">
-          <van-search
-            shape="round"
-            input-align="center"
-            class="van-search"
-            left-icon=""
-            readonly
-          >
+          <van-search shape="round" input-align="center" class="van-search" left-icon readonly>
             <template #right-icon>
               <div class="search-placeholder">
-                <img :src="searchIcon" alt="" class="search-icon" />
+                <img :src="searchIcon" alt class="search-icon" />
                 <div>{{ $t("找货源/商品/供应商/求购") }}</div>
               </div>
             </template>
@@ -78,11 +56,7 @@
       </div>
       <!-- banner -->
       <div class="banner-div">
-        <van-skeleton
-          :row="1"
-          class="big_picture skeleton"
-          :loading="loading.banner"
-        >
+        <van-skeleton :row="1" class="big_picture skeleton" :loading="loading.banner">
           <van-swipe
             class="my-swipe"
             style="border-radius: 10px; direction: ltr"
@@ -113,11 +87,7 @@
       <!-- 顶部菜单 -->
       <div>
         <div class="ks_daohang">
-          <van-skeleton
-            :row="15"
-            class="list_skeleton skeleton"
-            :loading="loading.list"
-          >
+          <van-skeleton :row="15" class="list_skeleton skeleton" :loading="loading.list">
             <swiper ref="mySwiper" class="swiper" :options="swiperOptions">
               <swiper-slide
                 v-for="item in categoryList"
@@ -146,11 +116,7 @@
         <div style="flex: 1">{{ $t("每日上新") }}</div>
       </div>
       <div class="touzi-zhuanjia">
-        <van-skeleton
-          :row="1"
-          class="newest_skeleton skeleton"
-          :loading="loading.newest"
-        >
+        <van-skeleton :row="1" class="newest_skeleton skeleton" :loading="loading.newest">
           <swiper class="swiper" :options="swiperOptions">
             <swiper-slide
               v-for="(item, index) in dailyNewArrivalList"
@@ -164,9 +130,7 @@
                   :src="item.imgUrl1 || $defaultGoodsImage"
                 />
               </div>
-              <div class="t1">
-                ${{ priceFormat(item?.discountPrice || item.sellingPrice) }}
-              </div>
+              <div class="t1">${{ priceFormat(item?.discountPrice || item.sellingPrice) }}</div>
             </swiper-slide>
           </swiper>
         </van-skeleton>
@@ -181,11 +145,7 @@
         <div style="flex: 1">{{ $t("推荐产品") }}</div>
       </div>
       <div class="banner-product">
-        <van-skeleton
-          :row="4"
-          class="product_skeleton skeleton"
-          :loading="loading.product"
-        >
+        <van-skeleton :row="4" class="product_skeleton skeleton" :loading="loading.product">
           <van-swipe @change="handleChangeSwiper">
             <van-swipe-item v-for="page in prodctPage" :key="page">
               <div class="swipe-product">
@@ -199,23 +159,16 @@
                   :key="item.id"
                 >
                   <div class="img-div">
-                    <img
-                      :src="item.imgUrl1 || $defaultGoodsImage"
-                      class="img"
-                    />
+                    <img :src="item.imgUrl1 || $defaultGoodsImage" class="img" />
                   </div>
                   <div class="content">
                     <span class="price">
                       ${{
-                        priceFormat(item.discountPrice || item.sellingPrice)
+                      priceFormat(item.discountPrice || item.sellingPrice)
                       }}
                     </span>
-                    <p class="sold">
-                      {{ $t("销量") }} {{ priceFormatInt(item?.soldNum) }}
-                    </p>
-                    <p class="describe">
-                      {{ $textOmit(item.name, 24) }}
-                    </p>
+                    <p class="sold">{{ $t("销量") }} {{ priceFormatInt(item?.soldNum) }}</p>
+                    <p class="describe">{{ $textOmit(item.name, 24) }}</p>
                   </div>
                   <!-- 活动折扣 -->
                   <div class="discount_box" v-if="item.discountRatio >= 0.01">
@@ -238,18 +191,11 @@
         </van-skeleton>
       </div>
       <!-- 推荐店铺 -->
-      <div
-        class="Member-text"
-        style="display: flex; justify-content: center; align-items: center"
-      >
+      <div class="Member-text" style="display: flex; justify-content: center; align-items: center">
         <div style="flex: 1">{{ $t("推荐店铺") }}</div>
       </div>
       <div class="recommended-store">
-        <van-skeleton
-          :row="4"
-          class="product_skeleton skeleton"
-          :loading="loading.shop"
-        >
+        <van-skeleton :row="4" class="product_skeleton skeleton" :loading="loading.shop">
           <div
             v-for="item in recomendedStoreShopList"
             :key="item.key"
@@ -266,10 +212,10 @@
                   <p class="fallow">
                     {{ $t("关注") }}:
                     {{
-                      priceFormatInt(
-                        (+item?.fake || 0) + (+item?.focusNum || 0),
-                        true
-                      )
+                    priceFormatInt(
+                    (+item?.fake || 0) + (+item?.focusNum || 0),
+                    true
+                    )
                     }}
                   </p>
                   <p>
@@ -291,19 +237,15 @@
                   ]"
                   @click="jumpShop(item)"
                   :style="buttonStyle"
-                >
-                  {{ $t("访问商店") }} &nbsp;>
-                </div>
+                >{{ $t("访问商店") }} &nbsp;></div>
               </div>
             </div>
             <div class="bottom">
-              <span
-                >{{ $t("好评率") }}:
-                {{ Math.floor(item.highOpinion * 100) || 100 }}%</span
-              >
-              <span
-                >{{ $t("卖出") }}: {{ priceFormatInt(item.soldNum, 1) }}</span
-              >
+              <span>
+                {{ $t("好评率") }}:
+                {{ Math.floor(item.highOpinion * 100) || 100 }}%
+              </span>
+              <span>{{ $t("卖出") }}: {{ priceFormatInt(item.soldNum, 1) }}</span>
             </div>
           </div>
         </van-skeleton>
@@ -316,25 +258,17 @@
           <div class="download_wrap" v-if="isApp">
             <div class="down_title">
               {{
-                itemName == "Hive" ? $t("电商批发商城") : $t("跨境电商批发商城")
+              itemName == "Hive" ? $t("电商批发商城") : $t("跨境电商批发商城")
               }}
             </div>
             <div class="sub_title">{{ $t("品牌特卖/折扣不停") }}</div>
             <div class="btns">
-              <div
-                class="btn"
-                @click="handleDownload(0)"
-                v-if="itemName != 'Hive'"
-              >
-                <img src="@/assets/image/index/anzhuo.png" alt="" />
+              <div class="btn" @click="handleDownload(0)" v-if="itemName != 'Hive'">
+                <img src="@/assets/image/index/anzhuo.png" alt />
                 <span>{{ $t("安卓下载") }}</span>
               </div>
-              <div
-                class="btn"
-                @click="handleDownload(1)"
-                v-if="itemName != 'Hive'"
-              >
-                <img src="@/assets/image/index/ios.png" alt="" />
+              <div class="btn" @click="handleDownload(1)" v-if="itemName != 'Hive'">
+                <img src="@/assets/image/index/ios.png" alt />
                 <span>{{ $t("苹果下载") }}</span>
               </div>
             </div>
@@ -343,10 +277,7 @@
       </template>
 
       <!-- 热销产品 -->
-      <div
-        class="recommended-store"
-        v-if="recomendedStoreProductList.length > 0"
-      >
+      <div class="recommended-store" v-if="recomendedStoreProductList.length > 0">
         <div class="store_title">{{ $t("热销产品") }}</div>
         <div class="recommended-store-product">
           <div
@@ -360,18 +291,16 @@
             </div>
 
             <div class="content">
-              <span class="price"
-                >${{
-                  priceFormat(item.discountPrice)
-                    ? priceFormat(item.discountPrice)
-                    : priceFormat(item.sellingPrice)
-                }}</span
-              >
+              <span class="price">
+                ${{
+                priceFormat(item.discountPrice)
+                ? priceFormat(item.discountPrice)
+                : priceFormat(item.sellingPrice)
+                }}
+              </span>
               <p>{{ $t("销量") }}:{{ priceFormatInt(item.soldNum) }}</p>
               <!-- <p>{{$t('浏览量')}}:{{ item.pageviews }}</p> -->
-              <div class="describe">
-                {{ $textOmit(item.name) }}
-              </div>
+              <div class="describe">{{ $textOmit(item.name) }}</div>
             </div>
             <!-- 活动折扣 -->
             <div class="discount_box" v-if="item.discountRatio >= 0.01">
@@ -413,7 +342,7 @@ import {
   PasswordInput,
   NumberKeyboard,
   Badge,
-  Icon,
+  Icon
 } from "vant";
 import { shouyexinxi_post, huoquyue_post } from "@/API/user";
 import { apiQueryMessages } from "@/API/common";
@@ -424,7 +353,7 @@ import {
   home_category,
   home_sellerGoods,
   getSellerList,
-  apiGetBannerList,
+  apiGetBannerList
 } from "@/API/home";
 
 // import { Skeleton } from "vant";
@@ -447,7 +376,7 @@ export default {
     [PasswordInput.name]: PasswordInput,
     [NumberKeyboard.name]: NumberKeyboard,
     [Badge.name]: Badge,
-    [Icon.name]: Icon,
+    [Icon.name]: Icon
   },
   created() {
     this.init();
@@ -498,25 +427,25 @@ export default {
         slidesPerView: 3.5,
         autoplay: {
           delay: 3500,
-          disableOnInteraction: false,
-        },
+          disableOnInteraction: false
+        }
       },
       swiperOptions2: {
         loop: true,
         // slidesPerView: 3.5,
         autoplay: {
           delay: 3500,
-          disableOnInteraction: false,
-        },
+          disableOnInteraction: false
+        }
       },
       loading: {
         banner: true,
         list: true,
         product: true,
         newest: true,
-        shop: true,
+        shop: true
       },
-      isCn: localStorage.getItem("lang") === "cn",
+      isCn: localStorage.getItem("lang") === "cn"
     };
   },
   mounted() {
@@ -534,7 +463,7 @@ export default {
       if (this.itemName == "EShop") {
         return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.svg`);
       }
-      return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/${process.env.VUE_APP_ITEM_NAME}logo.svg`);
+      return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.svg`);
       // console.log(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.png`)
     },
     classOption() {
@@ -546,14 +475,14 @@ export default {
         openWatch: true, // 开启数据实时监控刷新dom
         singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
         singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-        waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
+        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
       };
     },
     buttonStyle() {
       if (this.itemName === "TikTokMall") {
         return {
           background: "#000000",
-          color: "#fff",
+          color: "#fff"
         };
       }
     },
@@ -588,10 +517,10 @@ export default {
         ar: require("@/assets/image/language/ar.png"),
         vi: require("@/assets/image/language/vi.png"),
         hi: require("@/assets/image/language/hi.png"),
-        id: require("@/assets/image/language/id.png"),
+        id: require("@/assets/image/language/id.png")
       };
       return language ? icon[language] : icon["en"];
-    },
+    }
   },
   methods: {
     information() {
@@ -651,12 +580,15 @@ export default {
         this.prodctPage = Math.ceil(this.productList.length / 4);
         this.loading.product = false;
       }
-      const [recommendRes, dailyNewArrivalRes, recomendedStoreProductRes] =
-        await Promise.all([
-          apiGetNewGoods({ pageNum: 1, pageSize: 24, type: 1 }),
-          apiGetNewGoods({ pageNum: 1, pageSize: 24, type: 0 }),
-          apiGetNewGoods({ pageNum: 1, pageSize: 24, type: 2 }),
-        ]);
+      const [
+        recommendRes,
+        dailyNewArrivalRes,
+        recomendedStoreProductRes
+      ] = await Promise.all([
+        apiGetNewGoods({ pageNum: 1, pageSize: 24, type: 1 }),
+        apiGetNewGoods({ pageNum: 1, pageSize: 24, type: 0 }),
+        apiGetNewGoods({ pageNum: 1, pageSize: 24, type: 2 })
+      ]);
 
       this.productList = recommendRes.result;
       this.prodctPage = Math.ceil(this.productList.length / 4);
@@ -664,7 +596,7 @@ export default {
 
       this.dailyNewArrivalList = [
         ...dailyNewArrivalRes.result,
-        ...dailyNewArrivalRes.result,
+        ...dailyNewArrivalRes.result
       ];
       this.loading.newest = false;
 
@@ -691,7 +623,7 @@ export default {
       }
       const { pageList } = await apiGetRecommendGoods({
         pageNum: 1,
-        pageSize: 20,
+        pageSize: 20
       });
       this.categoryList = pageList;
       this.loading.list = false;
@@ -729,13 +661,13 @@ export default {
         const { result } = await apiGetBannerList({
           type: "h5",
           pageNum: 1,
-          pageSize: 10,
+          pageSize: 10
         });
         if (result.length === 0) {
           this.banner = [
             { imgUrl: require("@/assets/image/index/banner0.png") },
             { imgUrl: require("@/assets/image/index/banner1.jpg") },
-            { imgUrl: require("@/assets/image/index/banner2.png") },
+            { imgUrl: require("@/assets/image/index/banner2.png") }
           ];
         } else {
           this.banner = result;
@@ -744,7 +676,7 @@ export default {
         this.banner = [
           { imgUrl: require("@/assets/image/index/banner0.png") },
           { imgUrl: require("@/assets/image/index/banner1.jpg") },
-          { imgUrl: require("@/assets/image/index/banner2.png") },
+          { imgUrl: require("@/assets/image/index/banner2.png") }
         ];
       }
       localStorage.setItem("index_banner", JSON.stringify(this.banner));
@@ -762,9 +694,9 @@ export default {
       let dataJson = {
         pageNum: 1,
         pageSize: 5,
-        isRec: 1,
+        isRec: 1
       };
-      getSellerList(dataJson).then((res) => {
+      getSellerList(dataJson).then(res => {
         this.recomendedStoreShopList = res.pageList;
         this.loading.shop = false;
         localStorage.setItem(
@@ -775,9 +707,9 @@ export default {
     },
     home_sellerGoods() {
       let data1 = {
-        recTime: Date.now(),
+        recTime: Date.now()
       };
-      home_sellerGoods(data1).then((res) => {
+      home_sellerGoods(data1).then(res => {
         //推荐产品
         this.productList = res.pageList;
         this.loading.product = false;
@@ -786,14 +718,14 @@ export default {
           this.productList.length > 0 && Math.ceil(this.productList.length / 4);
       });
       let data2 = {
-        newTime: Date.now(),
+        newTime: Date.now()
       };
-      home_sellerGoods(data2).then((res) => {
+      home_sellerGoods(data2).then(res => {
         //新品推荐
         this.dailyNewArrivalList = res.pageList;
         this.loading.newest = false;
       });
-      home_sellerGoods({}).then((res) => {
+      home_sellerGoods({}).then(res => {
         //商品底部
         this.recomendedStoreProductList = res.pageList;
       });
@@ -810,7 +742,7 @@ export default {
       this.$router.push("/ProductDetails?projectId=" + e);
     },
     shouyexinxi() {
-      shouyexinxi_post({}).then((res) => {
+      shouyexinxi_post({}).then(res => {
         this.gundongtongzhi = res.announcement.toString();
         this.banner = res.banner;
         this.vipData = res.vip_level;
@@ -820,13 +752,13 @@ export default {
       scrollTo({
         top: 0,
         left: 0,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     },
     onClickLeft() {},
     onClickRight() {},
     huoquyue() {
-      huoquyue_post({}).then((res) => {
+      huoquyue_post({}).then(res => {
         console.log(res);
         this.zijin = res;
       });
@@ -865,11 +797,11 @@ export default {
       sessionStorage.removeItem("classificationState");
       const query = {
         categoryId: item.categoryId,
-        className: item.name,
+        className: item.name
       };
       this.$router.push({
         path: "/Classification",
-        query,
+        query
       });
     },
     // 记录滚动条位置
@@ -877,7 +809,7 @@ export default {
       this.scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
       this.isShowTopBtn = this.scrollTop > 500;
-    },
+    }
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -886,14 +818,14 @@ export default {
   },
   watch: {
     $route: {
-      handler: function (to, form) {
+      handler: function(to, form) {
         if (form.path == "/language") {
           this.init();
         }
       },
-      deep: true,
-    },
-  },
+      deep: true
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -1183,7 +1115,7 @@ export default {
       opacity: 0.3;
       transition: opacity 0.5s,
         //@animation-duration-fast
-        background-color 0.5s; //@animation-duration-fast
+          background-color 0.5s; //@animation-duration-fast
 
       &:not(:last-child) {
         margin-right: 6px;
@@ -1251,7 +1183,7 @@ export default {
 
   .logo-img {
     width: auto;
-    height: 40px;
+    height: 20px;
   }
 
   .top_logo_img {

@@ -14,11 +14,7 @@
         />
         <div class="email">
           <span>{{ this.$t("获得您更多的优惠券") }}</span>
-          <input
-            v-model.trim="email"
-            :placeholder="this.$t('您的电子邮箱')"
-            :maxlength="50"
-          />
+          <input v-model.trim="email" :placeholder="this.$t('您的电子邮箱')" :maxlength="50" />
           <button @click="subscription">{{ this.$t("订阅") }}</button>
         </div>
         <ul>
@@ -49,9 +45,7 @@
               v-for="sub in item.subset"
               :key="sub.id"
               @click="handleJump(sub)"
-            >
-              {{ sub.text }}
-            </div>
+            >{{ sub.text }}</div>
           </li>
         </ul>
       </div>
@@ -96,35 +90,31 @@
       </div>-->
       <!-- 版权信息 -->
       <div class="copyright" v-if="name !== 'INT Overstock'">
-        <span v-if="!isEn"
-          >© {{ name }} {{ this.$t("有限公司2023 版权所有") }}</span
-        >
-        <span v-if="isEn"
-          >Copyright {{ name }} {{ this.$t("有限公司2023 版权所有") }}</span
-        >
+        <span v-if="!isEn">© {{ name }} {{ this.$t("有限公司2023 版权所有") }}</span>
+        <span v-if="isEn">Copyright {{ name }} {{ this.$t("有限公司2023 版权所有") }}</span>
         <template v-if="name !== 'TikTokMall'">
           <span v-if="isCn">
             {{ name }}
             {{
-              this.$t(
-                "Limited 作为信贷经纪人 (713206) 获得金融行为监管局的授权和监管，并专门与贷方 Home Retail Group Card Services Limited 合作，以"
-              )
+            this.$t(
+            "Limited 作为信贷经纪人 (713206) 获得金融行为监管局的授权和监管，并专门与贷方 Home Retail Group Card Services Limited 合作，以"
+            )
             }}
             {{ name }}
             {{ this.$t("Financial Services 的身份进行交易，") }}
             {{ name }}
             {{
-              this.$t(
-                "Financial Services 获得金融行为监管局的授权和监管以提供信贷(716148)。Home Retail Group Card Services Limited 注册于英国 (04007072)，地址为 Avebury: 489-499 Avebury Boulevard: Milton Keynes: United Kingdom。MK9 2NW。"
-              )
+            this.$t(
+            "Financial Services 获得金融行为监管局的授权和监管以提供信贷(716148)。Home Retail Group Card Services Limited 注册于英国 (04007072)，地址为 Avebury: 489-499 Avebury Boulevard: Milton Keynes: United Kingdom。MK9 2NW。"
+            )
             }}
           </span>
           <span v-else>
             {{ name }}
             {{
-              this.$t(
-                "Limited 作为信贷经纪人 (713206) 获得金融行为监管局的授权和监管，并专门与贷方 Home Retail Group Card Services Limited 合作，以"
-              )
+            this.$t(
+            "Limited 作为信贷经纪人 (713206) 获得金融行为监管局的授权和监管，并专门与贷方 Home Retail Group Card Services Limited 合作，以"
+            )
             }}
             {{ name }}
             {{ this.$t("Financial Services 的身份进行交易，") }}
@@ -132,10 +122,10 @@
         </template>
       </div>
       <div class="copyright" v-if="name === 'INT Overstock'">
-        <span
-          >© Copyright 2023, overstock8.me®, Inc.799 Coliseum Way Midvale, UT
-          84047 | 1-840-800-1088</span
-        >
+        <span>
+          © Copyright 2023, overstock8.me®, Inc.799 Coliseum Way Midvale, UT
+          84047 | 1-840-800-1088
+        </span>
       </div>
       <!-- dialog -->
       <van-dialog v-model="dialogShow" :title="$t('联系我们')">
@@ -186,7 +176,7 @@ import { removeStorage } from "@/utils/utis";
 export default {
   components: {
     [Field.name]: Field,
-    [Dialog.Component.name]: Dialog.Component,
+    [Dialog.Component.name]: Dialog.Component
   },
   data() {
     return {
@@ -209,123 +199,123 @@ export default {
                 ? this.$store.state.multiItem[process.env.VUE_APP_ITEM_NAME]
                     .customer_service
                 : "/customerServiceIndex?path=customerService",
-              text: this.$t("在线客服"),
+              text: this.$t("在线客服")
             },
             {
               path: "popover",
-              text: this.$t("联系我们"),
-            },
+              text: this.$t("联系我们")
+            }
             // {
             //     path: '',
             //     text: this.$t('合作供应商')
             // },
-          ],
+          ]
         },
         {
           title: this.$t("退货和换货"),
           subset: [
             {
               path: "/promote/#/privacyPolicy",
-              text: this.$t("隐私政策"),
+              text: this.$t("隐私政策")
             },
             {
               path: "/promote/#/returnPolicy",
-              text: this.$t("退货政策"),
+              text: this.$t("退货政策")
             },
             {
               path: "/promote/#/Delivery",
-              text: this.$t("送货及取货"),
+              text: this.$t("送货及取货")
             },
             {
               path: "/promote/#/shippingPolicy",
-              text: this.$t("卖家政策"),
-            },
-          ],
+              text: this.$t("卖家政策")
+            }
+          ]
         },
         {
           title: this.$t("用户中心"),
           subset: [
             {
               path: "/register",
-              text: this.$t("用户注册"),
+              text: this.$t("用户注册")
             },
             {
               path: "/order",
-              text: this.$t("订单查询"),
+              text: this.$t("订单查询")
             },
             {
               path: "/collectGoods",
-              text: this.$t("商品收藏"),
+              text: this.$t("商品收藏")
             },
             {
               path: "/me",
-              text: this.$t("我的钱包"),
-            },
-          ],
+              text: this.$t("我的钱包")
+            }
+          ]
         },
         {
           title: this.$t("关于我们"),
           subset: [
             {
               path: "",
-              text: this.$t("关于我们"),
+              text: this.$t("关于我们")
             },
             {
               path: "",
-              text: this.$t("招贤纳士"),
+              text: this.$t("招贤纳士")
             },
             {
               path: "",
-              text: this.$t("新闻资讯"),
+              text: this.$t("新闻资讯")
             },
             {
               path: "",
-              text: this.$t("现代奴隶声明"),
-            },
-          ],
-        },
+              text: this.$t("现代奴隶声明")
+            }
+          ]
+        }
       ],
       paymentList: [
         {
           path: "",
           icon: require("@/assets/image/footer/1.png"),
-          name: "Binance",
+          name: "Binance"
         },
         {
           path: "",
           icon: require("@/assets/image/footer/2.png"),
-          name: "Huobi",
+          name: "Huobi"
         },
         {
           path: "",
           icon: require("@/assets/image/footer/3.png"),
-          name: "OKX",
+          name: "OKX"
         },
         {
           path: "",
           icon: require("@/assets/image/footer/4.png"),
-          name: "Kraken",
+          name: "Kraken"
         },
         {
           path: "",
           icon: require("@/assets/image/footer/5.png"),
-          name: "coinbase",
+          name: "coinbase"
         },
         {
           path: "",
           icon: require("@/assets/image/footer/6.png"),
-          name: "MetaMask",
+          name: "MetaMask"
         },
         {
           path: "",
           icon: require("@/assets/image/footer/7.png"),
-          name: "KuCoin",
+          name: "KuCoin"
         },
         {
           path: "",
           icon: require("@/assets/image/footer/8.png"),
-          name: "Bitfinex",
-        },
+          name: "Bitfinex"
+        }
       ],
       argosImages,
       isCn: getStorage("lang") == "cn",
@@ -344,7 +334,7 @@ export default {
       isJa: getStorage("lang") == "ja",
       isPh: getStorage("lang") == "ph",
       isVi: getStorage("lang") == "vi",
-      isId: getStorage("lang") == "id",
+      isId: getStorage("lang") == "id"
     };
   },
   computed: {
@@ -378,7 +368,7 @@ export default {
           "INT Overstock",
           "TikTok-Wholesale",
           "AntMall",
-          "SM-wholesaleShop",
+          "SM-wholesaleShop"
         ].includes(process.env.VUE_APP_ITEM_NAME)
       ) {
         return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo2.${
@@ -387,7 +377,7 @@ export default {
       } else {
         return require(`@/assets/${process.env.VUE_APP_ITEM_NAME}/logo.svg`);
       }
-    },
+    }
   },
   created() {
     console.log(this.itemData, "itemData.logoHeight");
@@ -397,7 +387,7 @@ export default {
       this.textList[3].subset[0].path = "https://overstock8.me/gw/#/about";
       this.textList[3].subset[1] = {
         path: "https://overstock8.me/gw/#/",
-        text: this.$t("职业机会"),
+        text: this.$t("职业机会")
       };
       this.textList[3].subset[2] = {};
       this.textList[3].subset[3] = {};
@@ -405,31 +395,31 @@ export default {
     if (this.name === "Tongda") {
       this.argosImages[0] = {
         logo: require("@/assets/Tongda/amazon2.png"),
-        path: "https://www.amazon.com/",
+        path: "https://www.amazon.com/"
       };
     }
     if (this.name === "SM-wholesaleShop") {
       this.argosImages[0] = {
         logo: require("@/assets/SM-wholesaleShop/justeat.png"),
-        path: "https://www.justeattakeaway.com/",
+        path: "https://www.justeattakeaway.com/"
       };
       this.argosImages[1] = {
         logo: require("@/assets/SM-wholesaleShop/bdo.png"),
-        path: "https://www.bdo.com/",
+        path: "https://www.bdo.com/"
       };
       this.argosImages[2] = {};
       this.argosImages[3] = {};
       this.argosImages[5] = {
         path: "https://www.zellepay.com/",
-        logo: require("@/assets/image/footer/logo8.png"),
+        logo: require("@/assets/image/footer/logo8.png")
       };
       this.argosImages[6] = {
         path: "https://crypto.com/",
-        logo: require("@/assets/image/footer/logo6.png"),
+        logo: require("@/assets/image/footer/logo6.png")
       };
       this.argosImages[7] = {
         path: "https://www.sc.com/en/",
-        logo: require("@/assets/image/footer/logo7.png"),
+        logo: require("@/assets/image/footer/logo7.png")
       };
       this.textList[3].subset[0].path =
         "https://www.smsupermalls.com/about-us/";
@@ -437,7 +427,7 @@ export default {
     if (this.name === "FamilyShop") {
       this.argosImages[5] = {
         path: "https://crypto.com/",
-        logo: require("@/assets/image/footer/logo6.png"),
+        logo: require("@/assets/image/footer/logo6.png")
       };
     }
     if (["FamilyMart", "Hive", "TikTok-Wholesale"].includes(this.name)) {
@@ -450,42 +440,42 @@ export default {
       this.textList[3] = {};
     }
     if (this.name == "Argos") {
-      this.paymentList = this.paymentList.map((item) => {
+      this.paymentList = this.paymentList.map(item => {
         if (item.name === "MetaMask") {
           item = {
             path: "https://crypto.com/",
             icon: require("@/assets/image/footer/11.png"),
-            name: "Crypto",
+            name: "Crypto"
           };
         } else if (item.name === "KuCoin") {
           item = {
             path: "http://www.bitopro.com/",
             icon: require("@/assets/image/footer/9.png"),
-            name: "Bitopro",
+            name: "Bitopro"
           };
         } else if (item.name === "Bitfinex") {
           item = {
             path: "https://max.maicoin.com/",
             icon: require("@/assets/image/footer/10.png"),
-            name: "Max",
+            name: "Max"
           };
         }
         return item;
       });
     }
     if (["Hive", "TikTok-Wholesale"].includes(this.name)) {
-      this.paymentList = this.paymentList.map((item) => {
+      this.paymentList = this.paymentList.map(item => {
         if (item.name === "MetaMask") {
           item = {
             path: "https://www.bitoex.com/",
             icon: require("@/assets/image/footer/9.png"),
-            name: "Bitoex",
+            name: "Bitoex"
           };
         } else if (item.name === "Bitfinex") {
           item = {
             path: "https://max.maicoin.com/",
             icon: require("@/assets/image/footer/10.png"),
-            name: "Max",
+            name: "Max"
           };
         }
         return item;
@@ -493,8 +483,8 @@ export default {
       this.textList[3].subset = [
         {
           path: "/promote/#/Hive-about",
-          text: this.$t("关于我们"),
-        },
+          text: this.$t("关于我们")
+        }
       ];
     }
     if (this.name == "Shop2u") {
@@ -514,12 +504,13 @@ export default {
     if (!window.plus) {
       if (this.name == "Shop2u") {
         this.textList[0].subset.push({
-          path: "https://play.google.com/store/apps/details?id=com.commerce.app",
-          text: this.$t("安卓下载"),
+          path:
+            "https://play.google.com/store/apps/details?id=com.commerce.app",
+          text: this.$t("安卓下载")
         });
         this.textList[0].subset.push({
           path: "https://apps.apple.com/my/app/shop2u/id6448880380",
-          text: this.$t("苹果下载"),
+          text: this.$t("苹果下载")
         });
         return;
       }
@@ -527,16 +518,16 @@ export default {
         if (this.name == "INT Overstock") {
           this.textList[0].subset.push({
             path: location.origin + "/app.html",
-            text: this.$t("应用程序下载"),
+            text: this.$t("应用程序下载")
           });
         } else {
           this.textList[0].subset.push({
             path: location.origin + "/app.html",
-            text: this.$t("APP下载(买家端)"),
+            text: this.$t("APP下载(买家端)")
           });
           this.textList[0].subset.push({
             path: location.origin + "/app.html",
-            text: this.$t("APP下载(卖家端)"),
+            text: this.$t("APP下载(卖家端)")
           });
         }
       }
@@ -570,17 +561,16 @@ export default {
       } else if (path.indexOf("/#/") != -1) {
         let query = { title: name || text };
         if (window.plus) {
-          query.url = `${this.itemData.app_url}${path}?lang=${
-            getStorage("lang") || "en"
-          }`;
+          query.url = `${this.itemData.app_url}${path}?lang=${getStorage(
+            "lang"
+          ) || "en"}`;
         } else {
-          query.url = `${window.origin}${path}?lang=${
-            getStorage("lang") || "en"
-          }`;
+          query.url = `${window.origin}${path}?lang=${getStorage("lang") ||
+            "en"}`;
         }
         this.$router.push({
           path: "/iframe",
-          query,
+          query
         });
       } else {
         if (path == "/register") {
@@ -589,7 +579,7 @@ export default {
               title: this.$t("您已登录"),
               message: this.$t("是否跳转到注册页面"),
               confirmButtonText: this.$t("确认"),
-              cancelButtonText: this.$t("取消"),
+              cancelButtonText: this.$t("取消")
             }).then(() => {
               this.removeStorage("token");
               this.$router.push("/register");
@@ -625,8 +615,8 @@ export default {
     isValidEmail(email) {
       var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return emailRegex.test(email);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -671,7 +661,7 @@ export default {
     .logo {
       // width: 118px;
       width: auto;
-      height: 60px;
+      height: 30px;
     }
 
     .email {
