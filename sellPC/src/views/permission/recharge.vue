@@ -1,11 +1,7 @@
 <template>
   <div class="recharge-main">
     <el-card style="display: flex; flex: 1; width: 100%; height: 100%">
-      <div
-        class="recharge"
-        style="height: 120px"
-        v-if="['Shop2U'].includes(projectTitle)"
-      >
+      <div class="recharge" style="height: 120px" v-if="['Shop2U'].includes(projectTitle)">
         <div class="biaoti">{{ $t("充值方式") }}</div>
         <div class="duoxuan">
           <el-select
@@ -36,9 +32,7 @@
               class="baocunerweima-buuon"
               style="margin-top: 20px"
               @click="baocunhaibao"
-            >
-              {{ $t("保存二维码") }}
-            </div>
+            >{{ $t("保存二维码") }}</div>
           </div>
         </div>
         <div class="biaoti">{{ $t("币种") }}</div>
@@ -58,16 +52,18 @@
             />
           </div>
           <!-- <div @click="wei_chongzhi('支付宝')" class="weixuan xuan1">
-            {{ $t('支付宝') }} 
+            {{ $t('支付宝') }}
             <img v-if="type===item" class="xuanzhong-img" src="../../assets/block_choose.png"/>
           </div>
           <div @click="wei_chongzhi('微信')" class="weixuan xuan1">
-            {{ $t('微信') }} 
+            {{ $t('微信') }}
             <img v-if="type===item" class="xuanzhong-img" src="../../assets/block_choose.png"/>
-          </div>
-          <div  class="xuan1 weixuan" v-if="['FamilyShop','JustShop','TikTok-Wholesale'].includes(projectTitle)" @click="userBarkFunction">
-            {{ $t('银行卡') }}
-          </div> -->
+          </div>-->
+          <div
+            class="xuan1 weixuan"
+            v-if="['FamilyShop','JustShop','TikTok-Wholesale','tikTok'].includes(projectTitle)"
+            @click="userBarkFunction"
+          >{{ $t('银行卡') }}</div>
         </div>
         <div class="biaoti">{{ $t("区块链网络") }}</div>
         <div class="duoxuan">
@@ -100,9 +96,7 @@
               style="color: #4aa8ff"
               v-clipboard:copy="tongdao_xuanzhong.address"
               v-clipboard:success="clipboardSuccess"
-            >
-              {{ $t("复制") }}
-            </div>
+            >{{ $t("复制") }}</div>
           </div>
         </div>
         <div class="biaoti">{{ $t("充值数量") }}</div>
@@ -121,21 +115,17 @@
         </div>
         <div class="biaoti">
           {{ $t("预计到账") }}({{ $t("当前汇率") }} 1:{{
-            tongdao_xuanzhong.fee
+          tongdao_xuanzhong.fee
           }})
         </div>
         <div class="chongzhifuzhi">
           <div class="chongzhifuzhi2">
-            <div class="dizhi">
-              {{ (form.amount * tongdao_xuanzhong.fee).toFloor(2) }}
-            </div>
+            <div class="dizhi">{{ (form.amount * tongdao_xuanzhong.fee).toFloor(2) }}</div>
             <div style="flex: 1"></div>
-            <div class="fuzhi11" style="">{{ $t("USDT") }}</div>
+            <div class="fuzhi11" style>{{ $t("USDT") }}</div>
           </div>
         </div>
-        <div class="biaoti" style="margin-bottom: 10px">
-          {{ $t("上传图片（上传支付详情截图）") }}
-        </div>
+        <div class="biaoti" style="margin-bottom: 10px">{{ $t("上传图片（上传支付详情截图）") }}</div>
         <div class="shangchaun">
           <!--        <van-uploader v-model="fileList" multiple :max-count="1" preview-size="120px" :after-read="afterRead"/>-->
           <van-uploader
@@ -143,7 +133,7 @@
             :after-read="afterRead"
             :max-count="1"
             :max-size="isOverSize"
-            accept="image/png,image/jpg,image/jpeg"
+            accept="image/png, image/jpg, image/jpeg"
             deletable
             preview-size="120px"
             @delete="deleteImg(1)"
@@ -151,9 +141,11 @@
           />
         </div>
         <div class="tijiao">
-          <el-button type="primary" @click="submitOrder" style="width: 120px">{{
+          <el-button type="primary" @click="submitOrder" style="width: 120px">
+            {{
             $t("提交")
-          }}</el-button>
+            }}
+          </el-button>
         </div>
       </div>
       <div class="recharge" v-if="channel === 'Bank'">
@@ -197,12 +189,7 @@
             </div>
           </div>
           <div class="tijiao">
-            <el-button
-              type="primary"
-              @click="submitBankOrder"
-              style="width: 120px"
-              >{{ $t("提交") }}</el-button
-            >
+            <el-button type="primary" @click="submitBankOrder" style="width: 120px">{{ $t("提交") }}</el-button>
           </div>
         </template>
         <template v-else>
@@ -234,12 +221,7 @@
           </div>
         </div>
         <div class="tijiao">
-          <el-button
-            type="primary"
-            @click="submitGcashOrder"
-            style="width: 120px"
-            >{{ $t("提交") }}</el-button
-          >
+          <el-button type="primary" @click="submitGcashOrder" style="width: 120px">{{ $t("提交") }}</el-button>
         </div>
       </div>
     </el-card>
@@ -259,52 +241,52 @@ import {
   selectPaymentChannel,
   session_token,
   thirdPartyRecharge,
-  thirdPartyRechargeGcash,
+  thirdPartyRechargeGcash
 } from "@/api/user";
 import clipboard from "@/directive/clipboard/index.js";
 import { projectTitle } from "@/settings";
 
 export default {
   directives: {
-    clipboard,
+    clipboard
   },
   data() {
     return {
       projectTitle,
       formParaCurrency: {
-        amount: "",
+        amount: ""
       },
       formParaCurrencyQuota: {
         min_amount: 2000,
-        max_amount: 30000,
+        max_amount: 30000
       },
       channelMap: [{ label: this.$t("加密货币"), value: "fund" }],
       channel: "fund",
       formRecharge: {
-        withdrawalMethod: 1,
+        withdrawalMethod: 1
       },
       form: {
-        amount: "",
+        amount: ""
       },
       rules: {
         amount: [
           {
             required: true,
             message: this.$t("请输入充值数量"),
-            trigger: "blur",
+            trigger: "blur"
           },
-          { validator: this.validateAmount, trigger: "change" },
-        ],
+          { validator: this.validateAmount, trigger: "change" }
+        ]
       },
       rulesParaCurrency: {
         amount: [
           {
             required: true,
             message: this.$t("请输入充值数量"),
-            trigger: "blur",
+            trigger: "blur"
           },
-          { validator: this.validateAmountParaCurrency, trigger: "change" },
-        ],
+          { validator: this.validateAmountParaCurrency, trigger: "change" }
+        ]
       },
       data: {},
       codes: "",
@@ -326,13 +308,13 @@ export default {
         "GCash2.0",
         "GCash3.0",
         "Maya",
-        "GCash pay",
-      ],
+        "GCash pay"
+      ]
     };
   },
   components: {
     QRCode: QRCode,
-    [Uploader.name]: Uploader,
+    [Uploader.name]: Uploader
   },
   computed: {
     isOverSize() {
@@ -342,48 +324,45 @@ export default {
       return this.$store.getters.rechargeExchangeRate;
     },
     channelList() {
-      let data = [
-        { label: this.$t("加密货币"), value: "fund" },
-        { label: this.$t("银行卡"), value: "Bank" },
-      ];
+      let data = [{ label: this.$t("加密货币"), value: "fund" }];
       if (["Shop2U"].includes(projectTitle)) {
         data = [
           ...data,
           {
             label: "GCash pay",
-            value: "GCash pay",
+            value: "GCash pay"
           },
           {
             label: "GCash",
-            value: "GCash",
+            value: "GCash"
           },
           {
             label: "GCash2.0",
-            value: "GCash2.0",
+            value: "GCash2.0"
           },
           {
             label: "GCash3.0",
-            value: "GCash3.0",
+            value: "GCash3.0"
           },
           {
             label: "Maya",
-            value: "Maya",
-          },
+            value: "Maya"
+          }
         ];
       }
       return data;
-    },
+    }
   },
   watch: {
     channel(val) {
       if (val === "Bank") {
-        this.tongdao_qiehuan2(this.type_list.find((item) => item === "USDT"));
+        this.tongdao_qiehuan2(this.type_list.find(item => item === "USDT"));
       } else if (this.rechargeExchangeArr.includes(val)) {
         if (["Shop2U"].includes(projectTitle)) {
           this.getSysParaCurrency(val);
         }
       }
-    },
+    }
   },
   created() {
     this.selectPaymentChannel();
@@ -404,7 +383,7 @@ export default {
     },
     changeParaCurrency() {
       let pc = this.paraCurrencyList.find(
-        (item) => item.bank_code === this.paraCurrency
+        item => item.bank_code === this.paraCurrency
       );
       this.quotaReminderParaCurrency.min =
         this.$t("充值价值不得小于最小限额") +
@@ -414,22 +393,21 @@ export default {
       this.formParaCurrency.amount = "";
     },
     getSysParaCurrency(productType) {
-      getSysParaCurrency().then((res) => {
+      getSysParaCurrency().then(res => {
         if (this.rechargeExchangeArr.includes(productType)) {
           this.formParaCurrencyQuota =
             res.data &&
             res.data
-              .find((item) => item.productType === productType)
-              .range.find((item) => item.bank_code === "PHP");
+              .find(item => item.productType === productType)
+              .range.find(item => item.bank_code === "PHP");
         } else {
           this.paraCurrencyList =
             res.data &&
-            res.data.find((item) => item.productType === productType).range;
+            res.data.find(item => item.productType === productType).range;
         }
-        this.channelMap = this.channelList.filter((item) => {
+        this.channelMap = this.channelList.filter(item => {
           const itemValue =
-            res.data.find((resItem) => resItem.productType === item.value) ||
-            {};
+            res.data.find(resItem => resItem.productType === item.value) || {};
           return item.value === itemValue.productType;
         });
         this.channelMap.unshift({ label: this.$t("加密货币"), value: "fund" });
@@ -462,7 +440,7 @@ export default {
         pc = this.formParaCurrencyQuota;
       } else {
         pc = this.paraCurrencyList.find(
-          (item) => item.bank_code === this.paraCurrency
+          item => item.bank_code === this.paraCurrency
         );
       }
       // let pc = this.paraCurrencyList.find(item => item.bank_code === this.paraCurrency)
@@ -480,13 +458,13 @@ export default {
       this.$message({
         message: this.$t("复制成功"),
         type: "success",
-        duration: 1500,
+        duration: 1500
       });
     },
     onOversize(file) {
       this.$notify({
         message: this.$t("上传图片大小不能超过 10MB!"),
-        type: "warning",
+        type: "warning"
       });
     },
     deleteImg(index) {
@@ -520,13 +498,13 @@ export default {
         Toast(this.$t("充值价值不得大于最大限额") + 100000 + "USDT");
         return;
       }
-      session_token({}).then((res) => {
+      session_token({}).then(res => {
         this.session_token = res.data.session_token;
         thirdPartyRecharge({
           session_token: this.session_token,
           amount: this.formParaCurrency.amount,
-          frenchCurrency: this.paraCurrency,
-        }).then((res) => {
+          frenchCurrency: this.paraCurrency
+        }).then(res => {
           Toast.success(this.$t("订单提交成功"));
           //打开新的页面给用户支付
           window.open(res.data);
@@ -534,7 +512,7 @@ export default {
           setTimeout(() => {
             this.$router.push({
               path: "/wallet/index",
-              query: { type: "recharge" },
+              query: { type: "recharge" }
             });
           }, 1000);
         });
@@ -567,7 +545,7 @@ export default {
         );
         return;
       }
-      session_token({}).then((res) => {
+      session_token({}).then(res => {
         this.session_token = res.data.session_token;
         //当前域名
         const params = {
@@ -576,7 +554,7 @@ export default {
           pageUrl:
             this.channel === "GCash"
               ? null
-              : window.location.href + "/www#/wallet/index",
+              : window.location.href + "/www#/wallet/index"
         };
         let rechargeType = "PHP_recharge";
         switch (this.channel) {
@@ -596,7 +574,7 @@ export default {
             rechargeType = "PHP_recharge4";
             break;
         }
-        thirdPartyRechargeGcash(params, rechargeType).then((res) => {
+        thirdPartyRechargeGcash(params, rechargeType).then(res => {
           Toast.success(this.$t("订单提交成功"));
           //打开新的页面给用户支付
           window.open(res.data);
@@ -604,7 +582,7 @@ export default {
           setTimeout(() => {
             this.$router.push({
               path: "/wallet/index",
-              query: { type: "recharge" },
+              query: { type: "recharge" }
             });
           }, 1000);
         });
@@ -642,13 +620,13 @@ export default {
         );
         return;
       }
-      session_token({}).then((res) => {
+      session_token({}).then(res => {
         this.session_token = res.data.session_token;
         this.chongzhitijiao();
       });
     },
     rechargeLimitConfig() {
-      rechargeLimitConfig({}).then((configRes) => {
+      rechargeLimitConfig({}).then(configRes => {
         const rechargeAmountMin = configRes.data?.rechargeAmountMin || 10;
         const rechargeAmountMax = configRes.data?.rechargeAmountMax || 0;
         this.tongdao_xuanzhong.recharge_limit_min = rechargeAmountMin;
@@ -672,13 +650,13 @@ export default {
         img: this.shangchuanurl,
         coin: this.tongdao_xuanzhong.coin,
         channel_address: this.tongdao_xuanzhong.address,
-        tx: "123",
+        tx: "123"
       };
       chongzhitijiao_post(data)
-        .then((res) => {
+        .then(res => {
           this.$notify({
             message: this.$t("提交成功"),
-            type: "success",
+            type: "success"
           });
           this.form.amount = "";
           this.fileList = [];
@@ -688,11 +666,11 @@ export default {
           setTimeout(() => {
             this.$router.push({
               path: "/wallet/index",
-              query: { type: "recharge" },
+              query: { type: "recharge" }
             });
           }, 1000);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err.msg);
         });
     },
@@ -706,7 +684,10 @@ export default {
       //   return;
       // }
       // this.tongdao_xuanzhong = e
-      if (this.channel === "Bank" && ["FamilyShop"].includes(projectTitle)) {
+      if (
+        this.channel === "Bank" &&
+        ["FamilyShop", "tikTok"].includes(projectTitle)
+      ) {
         //localStorage缓存里加上showCustomer=true
         this.$store.commit("app/SET_SHOW_CUSTOMER", true);
         return;
@@ -723,7 +704,7 @@ export default {
       // this.$message("银行卡充值请联系客服")
     },
     selectPaymentChannel() {
-      selectPaymentChannel({}).then((e) => {
+      selectPaymentChannel({}).then(e => {
         // console.log(res22)
         let res22 = e.data;
         // this.code = this.$route.query.usercode
@@ -736,9 +717,9 @@ export default {
           this.type_list.push("USDT");
         }
         this.type_list = [...new Set(this.type_list)];
-        // if (['FamilyShop'].includes(projectTitle)) {
-        //   this.type_list.push(this.$t('银行卡'))
-        // }
+        if (["FamilyShop"].includes(projectTitle)) {
+          this.type_list.push(this.$t("银行卡"));
+        }
         this.tongdao_xuanzhong = this.tongdao[0];
         this.useqrcode1();
         this.huilu_huoqu_post();
@@ -765,7 +746,7 @@ export default {
       }
     },
     huilu_huoqu_post(cb) {
-      huilu_huoqu_post({ symbol: this.tongdao_xuanzhong.coin }).then((res) => {
+      huilu_huoqu_post({ symbol: this.tongdao_xuanzhong.coin }).then(res => {
         console.log(res);
         this.tongdao_xuanzhong.fee = res.data.price;
         cb && cb();
@@ -780,11 +761,11 @@ export default {
       that.fileList[0].status = "uploading";
       that.fileList[0].message = that.$t("上传中...");
       imageUpload(formData)
-        .then((res) => {
+        .then(res => {
           this.shangchuanurl = res.data;
           that.fileList[0].status = "done";
         })
-        .catch(function (err) {
+        .catch(function(err) {
           console.log(err);
           this.fileList = [];
           that.fileList[0].status = "failed";
@@ -818,7 +799,7 @@ export default {
       if (!url) {
         return;
       }
-      QRCode.toCanvas(canvas, url, function (error) {
+      QRCode.toCanvas(canvas, url, function(error) {
         if (error) {
           console.error(error);
         } else {
@@ -830,7 +811,7 @@ export default {
     baocunhaibao() {
       let myCanvas = document.getElementsByTagName("canvas");
       this.imgUrl = myCanvas[0].toDataURL("image/png");
-      this.getUrlBase64(this.imgUrl).then((base64) => {
+      this.getUrlBase64(this.imgUrl).then(base64 => {
         let link = document.createElement("a");
         link.href = base64;
         link.download = "qrCode.png";
@@ -838,13 +819,13 @@ export default {
       });
     },
     getUrlBase64(url) {
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         let canvas = document.createElement("canvas");
         let ctx = canvas.getContext("2d");
         let img = new Image();
         img.crossOrigin = "Anonymous"; //允许跨域
         img.src = url;
-        img.onload = function () {
+        img.onload = function() {
           canvas.height = 300;
           canvas.width = 300;
           ctx.drawImage(img, 0, 0, 300, 300);
@@ -864,8 +845,8 @@ export default {
     },
     onClick1() {
       this.$router.push({ path: "/rechargeRecord" });
-    },
-  },
+    }
+  }
 };
 </script>
 
