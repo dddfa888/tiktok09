@@ -1,6 +1,7 @@
 <template>
   <div class="bg-gray-200 my-content">
-    <div class="bg" :style="{ 'background-image': 'url(' + bgImg + ')' }"></div>
+    <!--<div class="bg" :style="{ 'background-image': 'url(' + bgImg + ')' }"></div>-->
+    <div class="bg"></div>
     <div class="content">
       <div class="flex items-center info">
         <div class="flex items-center userinfo-content">
@@ -141,7 +142,7 @@
         <van-cell>
           <template #title>
             <div class="color-333" style="font-size: 20px; font-weight: 600">
-              {{ t('送货金额') }}: ${{
+              {{ t('累计收益') }}: ${{
               showWalletNum
               ? numberStrFormat(userInfo.frozenAndLate)
               : '*****'
@@ -1035,6 +1036,7 @@ nextTick(() => {
   > .bg {
     width: 100%;
     height: 280px;
+    background-color: #303231;
     background-repeat: no-repeat;
     background-position: center top;
     background-size: cover;

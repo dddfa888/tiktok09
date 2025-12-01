@@ -34,7 +34,7 @@
               :active-value="1"
             />
           </div>
-        </div> -->
+        </div>-->
         <div class="flex pl-4 pr-4 input-item pt-3 pb-3">
           <div>{{ $t('是否推荐') }}</div>
           <div class="flex">
@@ -67,7 +67,7 @@
         <!--                @cancel="onCancel(3)"-->
         <!--            />-->
         <!--          </van-popup>-->
-        <div class="flex pl-4 pr-4 input-item pt-3 pb-3">
+        <!--<div class="flex pl-4 pr-4 input-item pt-3 pb-3">
           <div>{{ $t('直通车') }}</div>
           <div class="flex">
             <van-switch
@@ -77,7 +77,7 @@
               inactive-color="#fff"
             />
           </div>
-        </div>
+        </div>-->
         <div class="tip pt-2 pb-2 pl-4 pr-4">{{ $t('百分比') }}</div>
         <van-cell-group class="input-field" inset>
           <van-field
@@ -106,19 +106,14 @@
         </div>
         <div class="tip pt-2 pb-2 pl-4 pr-4">{{ $t('折扣开始日期') }}</div>
         <van-cell-group class="input-field" inset style="position: relative">
-          <div
-            v-if="fromData.startTime"
-            class="time-clear"
-            @click="fromData.startTime = ''"
-          >
+          <div v-if="fromData.startTime" class="time-clear" @click="fromData.startTime = ''">
             <van-icon name="cross" />
           </div>
           <van-field
             @click-input="onClick(1)"
             v-model="fromData.startTime"
             :placeholder="t('折扣开始日期')"
-          >
-          </van-field>
+          ></van-field>
           <van-popup v-model:show="isShow" round position="bottom">
             <van-datetime-picker
               :min-date="minDate"
@@ -134,27 +129,18 @@
         </van-cell-group>
         <div class="tip pt-2 pb-2 pl-4 pr-4">{{ $t('折扣结束日期') }}</div>
         <van-cell-group class="input-field" inset style="position: relative">
-          <div
-            v-if="fromData.endTime"
-            class="time-clear"
-            @click="fromData.endTime = ''"
-          >
+          <div v-if="fromData.endTime" class="time-clear" @click="fromData.endTime = ''">
             <van-icon name="cross" />
           </div>
           <van-field
             @click-input="onClick(2)"
             v-model="fromData.endTime"
             :placeholder="t('折扣结束日期')"
-          >
-          </van-field>
+          ></van-field>
         </van-cell-group>
         <div class="tip pt-2 pb-2 pl-4 pr-4">{{ $t('折扣比例') }}</div>
         <van-cell-group class="input-field" inset>
-          <van-field
-            v-model="fromData.discount"
-            type="number"
-            :placeholder="t('折扣比例')"
-          >
+          <van-field v-model="fromData.discount" type="number" :placeholder="t('折扣比例')">
             <template #button>
               <span>%</span>
             </template>
@@ -179,9 +165,7 @@
             type="primary"
             @click="onSubmitPre"
             native-type="submit"
-          >
-            {{ $t('保存') }}
-          </van-button>
+          >{{ $t('保存') }}</van-button>
           <!-- <van-button
             v-if="!hideDelBtn"
             style="
@@ -196,7 +180,7 @@
             native-type="submit"
           >
             {{ $t('删除') }}
-          </van-button> -->
+          </van-button>-->
         </div>
       </van-form>
     </div>

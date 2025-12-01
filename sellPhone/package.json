@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --ext .vue,.js ./",
     "lint:fix": "eslint --fix --ext .vue,.js ./",
-    "dev": "vite --mode FASTBAY",
+    "dev": "vite --mode tiktok",
     "serve:abay": "vite --mode abay",
     "build": "cross-env flag=abay vite build --mode abay",
     "build:a": "vite build",

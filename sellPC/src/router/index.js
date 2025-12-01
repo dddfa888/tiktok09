@@ -47,7 +47,7 @@ export const constantRoutes = [
         component: () => import("@/views/dashboard/index"),
         name: "Dashboard",
         meta: { title: "仪表盘", icon: "dashboard" },
-        activeMenu: '/dashboard'
+        activeMenu: "/dashboard",
       },
     ],
   },
@@ -224,12 +224,12 @@ export const constantRoutes = [
       icon: "el-icon-s-data",
     },
     children: [
-      {
-        path: "car",
-        component: () => import("@/views/marketing/car"),
-        name: "car",
-        meta: { title: "店铺直通车", icon: "el-icon-truck" },
-      },
+      // {
+      //   path: "car",
+      //   component: () => import("@/views/marketing/car"),
+      //   name: "car",
+      //   meta: { title: "店铺直通车", icon: "el-icon-truck" },
+      // },
       {
         path: "buyHistory",
         component: () => import("@/views/marketing/buyHistory"),
@@ -278,14 +278,11 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
-
-
   /** when your routing map is too long, you can split it into small modules **/
   // componentsRouter,
   // chartsRouter,
   // nestedRouter,
   // tableRouter,
-
 
   // 404 page must be placed at the end !!!
   { path: "*", redirect: "/404", hidden: true },

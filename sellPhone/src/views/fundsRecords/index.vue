@@ -30,21 +30,37 @@
         <span class="font-16 color-333">{{ t('fundingRecords') }}</span>
       </template>
       <template #right>
-        <img @click="showSelect = true" class="w-5 h-5" src="@/assets/image/fundsRecords/Frame1277.png" alt="">
+        <img
+          @click="showSelect = true"
+          class="w-5 h-5"
+          src="@/assets/image/fundsRecords/Frame1277.png"
+          alt
+        />
       </template>
     </fxHeader>
     <div style="height: 46px;" />
-    <van-pull-refresh v-model="refreshing" :pulling-text="t('pullingText')" :loosing-text="t('loosingText')" :loading-text="t('loading')" @refresh="onRefresh">
-      <van-list v-model:loading="loading" :finished="finished" :loading-text="t('loading')" :finished-text="list.length ? t('product.3') : ''" @load="getListData">
+    <van-pull-refresh
+      v-model="refreshing"
+      :pulling-text="t('pullingText')"
+      :loosing-text="t('loosingText')"
+      :loading-text="t('loading')"
+      @refresh="onRefresh"
+    >
+      <van-list
+        v-model:loading="loading"
+        :finished="finished"
+        :loading-text="t('loading')"
+        :finished-text="list.length ? t('product.3') : ''"
+        @load="getListData"
+      >
         <div v-if="list.length">
-          <money-log-list
-            v-for="item in list"
-            :item="item"
-            :key="item.id"
-            @show="showMoneyLevel"
-          />
+          <money-log-list v-for="item in list" :item="item" :key="item.id" @show="showMoneyLevel" />
         </div>
-        <van-empty v-if="!list.length && !loading" :image="empytImg.href" :description="t('noData')" />
+        <van-empty
+          v-if="!list.length && !loading"
+          :image="empytImg.href"
+          :description="t('noData')"
+        />
       </van-list>
     </van-pull-refresh>
 
@@ -55,56 +71,56 @@
           <div class="font-16">{{ t('筛选信息') }}</div>
           <div class="enter" @click="enterClick">{{ t('确定') }}</div>
         </div>
-        <SelectList :list="selectListData" v-model="selectVal"/>
+        <SelectList :list="selectListData" v-model="selectVal" />
       </div>
     </van-popup>
   </div>
 </template>
 
 <script setup>
-import {ref, computed, reactive} from 'vue'
+import { ref, computed, reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
-import MoneyLogList from "@/views/fundsRecords/MoneyLogList.vue";
-import SelectList from "@/views/fundsRecords/SelectList.vue";
-import {_getMoneyLogList} from '@/service/fundsRecords.api.js'
+import MoneyLogList from '@/views/fundsRecords/MoneyLogList.vue'
+import SelectList from '@/views/fundsRecords/SelectList.vue'
+import { _getMoneyLogList } from '@/service/fundsRecords.api.js'
 
 const { t } = useI18n()
 const mode = import.meta.env.MODE
 
 const selectListData = [
-  {name: '全部', value: ''},
-  {name: '充值订单', value: 'recharge'},
-  {name: '提现订单', value: 'withdraw'},
-  {name: '推广佣金', value: 'brokerage'},
-  {name: '商品退款', value: 'return-order-seller'},
-  {name: '商品采购', value: 'push-order'},
-  {name: '直通车购买', value: 'combo-order'},
-  {name: '冻结余额', value: 'freeze_seller_money'},
-  {name: '解冻余额', value: 'unfreeze_seller_money'},
-  {name: '订单收入', value: 'order-income'},
-  {name: '支付订单', value: 'pay-order'},
-  {name: '会员退货', value: 'return-order-user'},
-  {name: '活动赠送', value: 'first-recharge-bonus'},
-  {name: '升级礼金', value: 'mall_level_upgrade_award'},
-  {name: '赠送彩金', value: 'jackpot'},
-  {name: '邀请奖励', value: 'invitation-rewards'},
-  {name: '等级购买', value: 'pay-level'},
-  {name: '注册礼金', value: 'sign-bonus'},
-  {name: '采购资金', value: 'purchase'},
+  { name: '全部', value: '' },
+  { name: '充值订单', value: 'recharge' },
+  { name: '提现订单', value: 'withdraw' },
+  { name: '推广佣金', value: 'brokerage' },
+  { name: '商品退款', value: 'return-order-seller' },
+  { name: '商品采购', value: 'push-order' },
+  // {name: '直通车购买', value: 'combo-order'},
+  { name: '冻结余额', value: 'freeze_seller_money' },
+  { name: '解冻余额', value: 'unfreeze_seller_money' },
+  { name: '订单收入', value: 'order-income' },
+  { name: '支付订单', value: 'pay-order' },
+  { name: '会员退货', value: 'return-order-user' },
+  { name: '活动赠送', value: 'first-recharge-bonus' },
+  { name: '升级礼金', value: 'mall_level_upgrade_award' },
+  { name: '赠送彩金', value: 'jackpot' },
+  { name: '邀请奖励', value: 'invitation-rewards' },
+  { name: '等级购买', value: 'pay-level' },
+  { name: '注册礼金', value: 'sign-bonus' },
+  { name: '采购资金', value: 'purchase' }
 ]
 if (['tiktok-wholesale'].includes(mode)) {
-  const index = selectListData.findIndex(item => item.value === 'jackpot')
+  const index = selectListData.findIndex((item) => item.value === 'jackpot')
   selectListData[index].name = '代充值'
 }
 
-const selectVal = ref('全部');
+const selectVal = ref('全部')
 
 const empytImg = new URL('@/assets/image/public/no_data.png', import.meta.url)
 const refreshing = ref(false)
 const loading = ref(true)
 const finished = ref(false)
 const currentType = computed(() => {
-  const option = selectListData.find(item => item.name === selectVal.value)
+  const option = selectListData.find((item) => item.name === selectVal.value)
   return option ? option.value : ''
 })
 
@@ -120,23 +136,27 @@ const getListData = () => {
     content_type: currentType.value
   }
 
-  _getMoneyLogList(params).then(res => {
-    let data = res || []
-    data.forEach(item => {
-      const itemObj = selectListData.find(_item => _item.value === item.content_type)
-      item.typeStr = itemObj ? t(itemObj.name) : item.content_type
-    })
-    list.value = page.value.page_no === 1 ? data : [...list.value, ...data]
-    loading.value = false
-    refreshing.value = false
+  _getMoneyLogList(params)
+    .then((res) => {
+      let data = res || []
+      data.forEach((item) => {
+        const itemObj = selectListData.find(
+          (_item) => _item.value === item.content_type
+        )
+        item.typeStr = itemObj ? t(itemObj.name) : item.content_type
+      })
+      list.value = page.value.page_no === 1 ? data : [...list.value, ...data]
+      loading.value = false
+      refreshing.value = false
 
-    finished.value = data.length < 20
-    page.value.page_no++
-  }).catch(() => {
-    finished.value = true
-    loading.value = false
-    refreshing.value = false
-  })
+      finished.value = data.length < 20
+      page.value.page_no++
+    })
+    .catch(() => {
+      finished.value = true
+      loading.value = false
+      refreshing.value = false
+    })
 }
 
 const onRefresh = () => {
@@ -145,7 +165,7 @@ const onRefresh = () => {
   getListData()
 }
 
-const showSelect = ref(false);
+const showSelect = ref(false)
 const cancelClick = () => {
   showSelect.value = false
 }
@@ -165,9 +185,9 @@ const levelInfo = reactive({
 
 const showMoneyLevel = (data) => {
   if (data.detail && data.detail.length) {
-    const levle1 = data.detail.find(item => Number(item.level) === 1)
-    const levle2 = data.detail.find(item => Number(item.level) === 2)
-    const levle3 = data.detail.find(item => Number(item.level) === 3)
+    const levle1 = data.detail.find((item) => Number(item.level) === 1)
+    const levle2 = data.detail.find((item) => Number(item.level) === 2)
+    const levle3 = data.detail.find((item) => Number(item.level) === 3)
 
     levelInfo.levle1 = levle1 ? Number(levle1.rebate).toFixed(2) : '0.00'
     levelInfo.levle2 = levle2 ? Number(levle2.rebate).toFixed(2) : '0.00'
@@ -182,8 +202,6 @@ const hideMoneyLevel = () => {
   levelInfo.levle3 = '0.00'
   showLevel.value = false
 }
-
-
 </script>
 
 <style lang="scss" scoped>
@@ -191,7 +209,8 @@ const hideMoneyLevel = () => {
   position: relative;
   height: 50px;
 
-  .cancel, .enter {
+  .cancel,
+  .enter {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

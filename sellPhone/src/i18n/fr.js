@@ -1130,5 +1130,6 @@ export default {
 	"等待确认":"En attente de confirmation",
 	"上传图片":"Télécharger des images",
 "从相册选择":"Charger une image",
-    "拍照":"Prendre une photo"
+    "拍照":"Prendre une photo",
+    "累计收益":"Revenus cumulés"
 };

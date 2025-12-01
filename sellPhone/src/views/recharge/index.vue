@@ -5,7 +5,7 @@
         <div>{{ t('recharge') }}</div>
       </template>
       <template #right>
-        <!-- <div @click="handleRecord">{{ t('rechargeRecord') }}</div> -->
+        <!-- <div @click="handleRecord">{{ t('rechargeRecord') }}</div>   -->
       </template>
     </fx-header>
     <div style="height: 46px" />
@@ -65,11 +65,11 @@ const isArLang = arLangCheck()
 const mode = import.meta.env.MODE
 
 const iconData = {
-  USDT: USDT
+  USDT: USDT,
   // USDC: USDC,
   // ETH: ETH,
   // 'BTC': BTC,
-  // BNB: BNB,
+  BNB: BNB
   // WX: WX,
   // ZFB: ZFB
 }
@@ -96,7 +96,7 @@ exchangeGetBlockChain()
       }
     }
 
-    if (['familyShop', 'sm', 'tiktok-wholesale', 'tiktokMall'].includes(mode)) {
+    if (['familyShop', 'sm', 'tiktok-wholesale', 'tiktokMall','tiktok'].includes(mode)) {
       list.value.push({
         icon: CARD,
         text: ['sm'].includes(mode) ? t('银行卡1') : t('银行卡'),

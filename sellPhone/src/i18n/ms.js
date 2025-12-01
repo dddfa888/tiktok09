@@ -1130,5 +1130,6 @@ export default {
 	"等待确认":"Pengesahan yang ditunda",
 	"上传图片":"Upload gambar",
 "从相册选择":"Pilih dari album",
-    "拍照":"Ambil foto"
+    "拍照":"Ambil foto",
+    "累计收益":"Pendapatan terkumpul",
 };

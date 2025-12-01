@@ -2,220 +2,296 @@
   <div class="login" :style="loginBg">
     <div class="login-content">
       <div class="login-logo">
-        <img :src="logo" alt="" style="height: 100%;"/>
+        <img :src="logo" alt style="height: 100%;" />
       </div>
       <!--      <div class="shop-name">Argos shop</div>-->
       <div class="shop-text">{{ $t('登录到您的帐户') }}</div>
       <div class="login-container">
         <div class="login-tab">
-          <div :class="current===0?'login-tab-item active':'login-tab-item'" @click="handleChange(0)">{{
-              $t('邮箱')
+          <div
+            :class="current===0?'login-tab-item active':'login-tab-item'"
+            @click="handleChange(0)"
+          >
+            {{
+            $t('邮箱')
             }}
           </div>
-          <div :class="current===1?'login-tab-item active':'login-tab-item'" @click="handleChange(1)">{{
-              $t('手机号')
+          <div
+            :class="current===1?'login-tab-item active':'login-tab-item'"
+            @click="handleChange(1)"
+          >
+            {{
+            $t('手机号')
             }}
           </div>
         </div>
         <div class="login-input-content">
-          <el-form ref="loginForm" :model="loginForm" autocomplete="on" class="login-form" label-position="left">
+          <el-form
+            ref="loginForm"
+            :model="loginForm"
+            autocomplete="on"
+            class="login-form"
+            label-position="left"
+          >
             <div class="login-input" v-if="current===0">
               <el-form-item prop="username">
-                <img :src="require('@/assets/images/login/account.png')" alt="" class="input-icon"/>
+                <img :src="require('@/assets/images/login/account.png')" alt class="input-icon" />
                 <el-input
-                    :placeholder="$t('请输入邮箱')"
-                    maxlength="64"
-                    id="username"
-                    v-model="loginForm.username"
-                    ref="username"
-                    clearable>
-                </el-input>
+                  :placeholder="$t('请输入邮箱')"
+                  maxlength="64"
+                  id="username"
+                  v-model="loginForm.username"
+                  ref="username"
+                  clearable
+                ></el-input>
               </el-form-item>
             </div>
             <div class="login-input" v-else>
               <el-form-item prop="phone">
-                <img :src="require('@/assets/images/login/phone2.png')" alt="" class="input-icon"/>
-                <el-dropdown class="input-dropdown" placement="bottom" trigger="click" @command="handleCommand"
-                             style="cursor: pointer">
-                          <span class="el-dropdown-link" placement="bottom-start">
-                            +{{ loginForm.religionCode }}<i class="ml-10 el-icon-caret-bottom"></i>
-                          </span>
+                <img :src="require('@/assets/images/login/phone2.png')" alt class="input-icon" />
+                <el-dropdown
+                  class="input-dropdown"
+                  placement="bottom"
+                  trigger="click"
+                  @command="handleCommand"
+                  style="cursor: pointer"
+                >
+                  <span class="el-dropdown-link" placement="bottom-start">
+                    +{{ loginForm.religionCode }}
+                    <i class="ml-10 el-icon-caret-bottom"></i>
+                  </span>
                   <el-dropdown-menu slot="dropdown" class="project-dropdown">
                     <div style="padding: 0 12px;box-sizing: border-box;">
-                      <el-input v-model="searchCountry" suffix-icon="el-icon-search" class="icon-search"
-                                @input="searchCountryList"></el-input>
+                      <el-input
+                        v-model="searchCountry"
+                        suffix-icon="el-icon-search"
+                        class="icon-search"
+                        @input="searchCountryList"
+                      ></el-input>
                     </div>
-                    <el-dropdown-item v-for="(item,index) in countryList" :key="index" :command='item.code'>
-                      {{ $t(item.zh) }}(+{{ item.code }})
-                    </el-dropdown-item>
+                    <el-dropdown-item
+                      v-for="(item,index) in countryList"
+                      :key="index"
+                      :command="item.code"
+                    >{{ $t(item.zh) }}(+{{ item.code }})</el-dropdown-item>
                   </el-dropdown-menu>
                 </el-dropdown>
                 <el-input
-                    class="phone-input"
-                    :placeholder="$t('请输入手机号')"
-                    maxlength="60"
-                    ref="username"
-                    v-model="loginForm.phone"
-                    id="phone"
-                    clearable>
-                </el-input>
+                  class="phone-input"
+                  :placeholder="$t('请输入手机号')"
+                  maxlength="60"
+                  ref="username"
+                  v-model="loginForm.phone"
+                  id="phone"
+                  clearable
+                ></el-input>
               </el-form-item>
             </div>
             <div class="login-input password">
               <el-form-item prop="password">
-                <img :src="require('@/assets/images/login/password.png')" alt="" class="input-icon"/>
-                <el-tooltip v-model="capsTooltip" content="Caps lock is On" manual placement="right">
-                  <PasswordInput ref="password" v-model="loginForm.password"
-                                 :type="passwordType" autocomplete="on" name="password"
-                                 :placeholder="$t('请输入你的密码')" @clear="clearPassword"
-                                 tabindex="2" @keyup.native="checkCapslock" @blur="capsTooltip = false"
-                                 @keyup.enter.native="onLogin"/>
+                <img :src="require('@/assets/images/login/password.png')" alt class="input-icon" />
+                <el-tooltip
+                  v-model="capsTooltip"
+                  content="Caps lock is On"
+                  manual
+                  placement="right"
+                >
+                  <PasswordInput
+                    ref="password"
+                    v-model="loginForm.password"
+                    :type="passwordType"
+                    autocomplete="on"
+                    name="password"
+                    :placeholder="$t('请输入你的密码')"
+                    @clear="clearPassword"
+                    tabindex="2"
+                    @keyup.native="checkCapslock"
+                    @blur="capsTooltip = false"
+                    @keyup.enter.native="onLogin"
+                  />
                 </el-tooltip>
               </el-form-item>
             </div>
             <div
-                style="height: 24px;margin-bottom:12px;display: flex;justify-content: space-between;align-items: center;">
+              style="height: 24px;margin-bottom:12px;display: flex;justify-content: space-between;align-items: center;"
+            >
               <div style="margin-right: 24px;font-size: 14px" v-if="!setting.hideLoginProtocol">
                 <!--      用户协议、服务条款、商家规则          -->
-                <el-checkbox v-model="loginForm.agree" label="1" style="font-size: 12px;color: #999999;">
-                  {{ $t('我已阅读并同意') }}
-                </el-checkbox>
-                <span style="color: #409EFF;cursor: pointer" @click="protocolVisible=true">{{ $t('商家规则') }}</span>
+                <el-checkbox
+                  v-model="loginForm.agree"
+                  label="1"
+                  style="font-size: 12px;color: #999999;"
+                >{{ $t('我已阅读并同意') }}</el-checkbox>
+                <span
+                  style="color: #409EFF;cursor: pointer"
+                  @click="protocolVisible=true"
+                >{{ $t('商家规则') }}</span>
               </div>
-              <div></div>
-              <el-popover
-                  trigger="click"
-                  :content="$t('忘记密码？请联系客服。')">
+              <div>
+                <el-button @click="toRegister" slot="reference" type="text">{{ $t('注册') }}</el-button>
+              </div>
+              <el-popover trigger="click" :content="$t('忘记密码？请联系客服。')">
                 <el-button slot="reference" type="text">{{ $t('忘记密码') }}</el-button>
               </el-popover>
             </div>
-            <el-button style="margin: auto" :disabled="!loginForm.agree&&!setting.hideLoginProtocol" type="primary"
-                       class="login-button" :loading="loading" @click.native.prevent="onLogin">
-              {{ $t('登录') }}
-            </el-button>
+            <el-button
+              style="margin: auto"
+              :disabled="!loginForm.agree&&!setting.hideLoginProtocol"
+              type="primary"
+              class="login-button"
+              :loading="loading"
+              @click.native.prevent="onLogin"
+            >{{ $t('登录') }}</el-button>
           </el-form>
         </div>
       </div>
     </div>
-    <Vcode :imgs="imgs" :show="isShowVerification" @close="onClose" @success="onSuccess"
-           :sliderText="$t('拖动滑块完成拼图')" style="direction: ltr;"
-           :failText="$t('验证失败，请重试')" :successText="$t('验证成功')"/>
-    <Globalization style="position: fixed;right: 24px;top: 24px"/>
-    <Customer/>
-    <el-image :src="loginBg" style="position: fixed;left: 0;top: 0;z-index: -1;height: 100%;width: 100%;" fit="cover"/>
-    <Protocol @closeProtocol="closeProtocol" v-if="protocolVisible"/>
+    <Vcode
+      :imgs="imgs"
+      :show="isShowVerification"
+      @close="onClose"
+      @success="onSuccess"
+      :sliderText="$t('拖动滑块完成拼图')"
+      style="direction: ltr;"
+      :failText="$t('验证失败，请重试')"
+      :successText="$t('验证成功')"
+    />
+    <Globalization style="position: fixed;right: 24px;top: 24px" />
+    <Customer />
+    <el-image
+      :src="loginBg"
+      style="position: fixed;left: 0;top: 0;z-index: -1;height: 100%;width: 100%;"
+      fit="cover"
+    />
+    <Protocol @closeProtocol="closeProtocol" v-if="protocolVisible" />
   </div>
 </template>
 
 <script>
 import PasswordInput from "@/components/PasswordInput";
-import Vcode from '@/components/Vcode'
-import img_1 from '@/assets/images/login/01.png'
-import img_2 from '@/assets/images/login/02.png'
-import img_3 from '@/assets/images/login/03.png'
-import img_4 from '@/assets/images/login/04.png'
-import img_5 from '@/assets/images/login/05.png'
-import {validEmail} from '@/utils/validate'
-import SocialSign from './components/SocialSignin'
-import {login2, loginFree} from "@/api/user";
-import {setToken} from '@/utils/auth'
-import {mapGetters} from "vuex";
-import {i18n} from "@/lang";
+import Vcode from "@/components/Vcode";
+import img_1 from "@/assets/images/login/01.png";
+import img_2 from "@/assets/images/login/02.png";
+import img_3 from "@/assets/images/login/03.png";
+import img_4 from "@/assets/images/login/04.png";
+import img_5 from "@/assets/images/login/05.png";
+import { validEmail } from "@/utils/validate";
+import SocialSign from "./components/SocialSignin";
+import { login2, loginFree } from "@/api/user";
+import { setToken } from "@/utils/auth";
+import { mapGetters } from "vuex";
+import { i18n } from "@/lang";
 import country from "@/utils/country";
 import Globalization from "@/components/Globalization";
 import Customer from "@/components/Customer/index.vue";
-import bg from '@/assets/images/login/login-bg.jpg'
-import hiveBg from '@/assets/images/login/hive-bg.png'
-import justShopBg from '@/assets/images/login/just-shop-bg.png'
-import wholesaleBg from '@/assets/images/login/wholesale-bg.jpg'
+import bg from "@/assets/images/login/login-bg.jpg";
+import hiveBg from "@/assets/images/login/hive-bg.png";
+import justShopBg from "@/assets/images/login/just-shop-bg.png";
+import wholesaleBg from "@/assets/images/login/wholesale-bg.jpg";
 import Protocol from "@/views/login/protocol.vue";
 
 const setting = require("@/settings");
 
 export default {
-  name: 'Login',
-  components: {Customer, SocialSign, Vcode, Globalization, PasswordInput, Protocol},
+  name: "Login",
+  components: {
+    Customer,
+    SocialSign,
+    Vcode,
+    Globalization,
+    PasswordInput,
+    Protocol
+  },
   computed: {
     ...mapGetters(["currentLanguage"])
   },
   data() {
-    const re = /^[0-9]+.?[0-9]*/;//判断字符串是否为数字//判断正整数/[1−9]+[0−9]∗]∗/
+    const re = /^[0-9]+.?[0-9]*/; //判断字符串是否为数字//判断正整数/[1−9]+[0−9]∗]∗/
     const validateUsername = (rule, value, callback) => {
-      console.log('rule', rule, value)
+      console.log("rule", rule, value);
       if (this.current === 0 && !validEmail(value)) {
-        console.log(123)
-        callback(new Error('Please enter the correct email'))
-      } else if (this.current === 1 && !re.test(value / 1) || value.length < 8) {
-        console.log(456)
-        callback(new Error('Please enter the correct phone'))
+        console.log(123);
+        callback(new Error("Please enter the correct email"));
+      } else if (
+        (this.current === 1 && !re.test(value / 1)) ||
+        value.length < 8
+      ) {
+        console.log(456);
+        callback(new Error("Please enter the correct phone"));
       } else {
-        callback()
+        callback();
       }
-    }
+    };
 
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error("The password can not be less than 6 digits"));
       } else {
-        callback()
+        callback();
       }
-    }
+    };
     return {
-      logo: require('@/assets/images/login/logo.png'),
+      logo: require("@/assets/images/login/logo.png"),
       setting,
       // regionList: [86, 852, 63, 992],
       // regionCode: 86,
       current: 0,
       imgs: [img_1, img_2, img_3, img_4, img_5],
       isShowVerification: false,
-      loginMethod: 'email',
+      loginMethod: "email",
       loginForm: {
-        username: '', // email
-        password: '',
-        phone: '',
+        username: "", // email
+        password: "",
+        phone: "",
         agree: false,
         religionCode: setting.countryCode
       },
       loginRules: {
-        username: [{required: true, trigger: 'blur', validator: validateUsername}],
-        phone: [{required: true, trigger: 'blur', validator: validateUsername}],
-        password: [{required: true, trigger: 'blur', validator: validatePassword}],
+        username: [
+          { required: true, trigger: "blur", validator: validateUsername }
+        ],
+        phone: [
+          { required: true, trigger: "blur", validator: validateUsername }
+        ],
+        password: [
+          { required: true, trigger: "blur", validator: validatePassword }
+        ]
       },
       protocolVisible: false,
-      passwordType: 'password',
+      passwordType: "password",
       capsTooltip: false,
       loading: false,
       showDialog: false,
       redirect: undefined,
       otherQuery: {},
       countryList: country,
-      activeAddress: '',
+      activeAddress: "",
       isCanLogin: false,
       userVisible: false,
       loginBg: bg,
       kyc_get: {},
-      searchCountry: '',
+      searchCountry: "",
       userProcess: 0,
       countryName: this.$t("请选择国家"),
-      countryCode: '',
+      countryCode: "",
       languages: [
         {
-          name: 'English',
-          value: 'en'
+          name: "English",
+          value: "en"
         },
         // {
         //   name: '한국어',
         //   value: 'ko'
         // },
         {
-          name: `${'简体中文'}`,
-          value: 'zh-CN'
+          name: `${"简体中文"}`,
+          value: "zh-CN"
         },
         {
-          name: `${'繁體中文'}`,
-          value: 'zh-TW'
+          name: `${"繁體中文"}`,
+          value: "zh-TW"
         }
-      ],
+      ]
     };
   },
   watch: {
@@ -223,15 +299,15 @@ export default {
       immediate: true,
       deep: false,
       handler(val) {
-        this.changeLang(val)
+        this.changeLang(val);
       }
     },
     $route: {
-      handler: function (route) {
-        const query = route.query
+      handler: function(route) {
+        const query = route.query;
         if (query) {
-          this.redirect = query.redirect
-          this.otherQuery = this.getOtherQuery(query)
+          this.redirect = query.redirect;
+          this.otherQuery = this.getOtherQuery(query);
         }
       },
       immediate: true
@@ -239,9 +315,9 @@ export default {
     loginForm: {
       handler() {
         const res = Object.keys(this.loginForm).filter(key => {
-          return this.loginForm[key] === ''
-        })
-        this.isCanLogin = res.length === 0
+          return this.loginForm[key] === "";
+        });
+        this.isCanLogin = res.length === 0;
       },
       immediate: true,
       deep: true
@@ -250,44 +326,46 @@ export default {
   created() {
     switch (setting.projectTitle) {
       case "FamilyShop":
-        this.loginBg = hiveBg
+        this.loginBg = hiveBg;
         break;
       case "JustShop":
-        this.loginBg = justShopBg
+        this.loginBg = justShopBg;
         break;
       case "Hive":
-        this.loginBg = hiveBg
+        this.loginBg = hiveBg;
         break;
       case "Wholesale":
-        this.loginBg = wholesaleBg
+        this.loginBg = wholesaleBg;
         break;
       default:
-        this.loginBg = bg
+        this.loginBg = bg;
         break;
     }
   },
   mounted() {
     if (this.$route.query.token) {
-      this.loginFree(this.$route.query.token)
-      return
+      this.loginFree(this.$route.query.token);
+      return;
     }
-    if (this.loginForm.username === '') {
-      this.$refs.username.focus()
-    } else if (this.loginForm.password === '') {
-      this.$refs.password.focus()
+    if (this.loginForm.username === "") {
+      this.$refs.username.focus();
+    } else if (this.loginForm.password === "") {
+      this.$refs.password.focus();
     }
-    this.loginForm.religionCode = parseInt(localStorage.getItem('religionCode') || setting.countryCode)
+    this.loginForm.religionCode = parseInt(
+      localStorage.getItem("religionCode") || setting.countryCode
+    );
 
     this.countryList.sort((a, b) => {
-      return this.$t(a.zh).localeCompare(this.$t(b.zh), i18n.locale)
-    })
-    this.$store.commit('chat/DELETE_CHAT_INTERVAL')
-    this.$store.commit('chat/DELETE_MASSAGE_INTERVAL')
-    window.addEventListener("keydown", (e) => {
+      return this.$t(a.zh).localeCompare(this.$t(b.zh), i18n.locale);
+    });
+    this.$store.commit("chat/DELETE_CHAT_INTERVAL");
+    this.$store.commit("chat/DELETE_MASSAGE_INTERVAL");
+    window.addEventListener("keydown", e => {
       if (e.keyCode === 9) {
         let activeEl = document.activeElement;
-        if (activeEl.id === 'username' || activeEl.id === "phone") {
-          this.$refs.password.focus()
+        if (activeEl.id === "username" || activeEl.id === "phone") {
+          this.$refs.password.focus();
         }
       }
     });
@@ -296,184 +374,201 @@ export default {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
+    toRegister() {
+      window.open("", "_blank");
+    },
     closeProtocol() {
-      this.protocolVisible = false
+      this.protocolVisible = false;
     },
     searchCountryList() {
       this.countryList = country.filter(item => {
-        return item.zh.indexOf(this.searchCountry) > -1 || item.en.toUpperCase().indexOf(this.searchCountry.toUpperCase()) > -1 || item.code.indexOf(this.searchCountry) > -1 || item.tw.indexOf(this.searchCountry) > -1 || item.ko.indexOf(this.searchCountry) > -1
-      })
+        return (
+          item.zh.indexOf(this.searchCountry) > -1 ||
+          item.en.toUpperCase().indexOf(this.searchCountry.toUpperCase()) >
+            -1 ||
+          item.code.indexOf(this.searchCountry) > -1 ||
+          item.tw.indexOf(this.searchCountry) > -1 ||
+          item.ko.indexOf(this.searchCountry) > -1
+        );
+      });
     },
     changeLang(val) {
-      let lang = ''
+      let lang = "";
       switch (val) {
-        case 'en':
+        case "en":
           this.langImg = this.en;
-          lang = 'en'
+          lang = "en";
           break;
-        case 'ko':
+        case "ko":
           this.langImg = this.ko;
-          lang = 'ko'
+          lang = "ko";
           break;
-        case 'zh-CN':
+        case "zh-CN":
           this.langImg = this.zhCN;
-          lang = 'cn'
+          lang = "cn";
           break;
-        case 'zh-TW':
+        case "zh-TW":
           this.langImg = this.zhTW;
-          lang = 'tw'
+          lang = "tw";
           break;
       }
-      this.languageName = (this.languages.find(item => item.value === val) || {name: 'English'}).name
+      this.languageName = (
+        this.languages.find(item => item.value === val) || { name: "English" }
+      ).name;
       i18n.locale = lang;
       //刷新页面
     },
     // 打开国家列表底部弹窗
     openBtn() {
       if (!this.disabled2()) {
-        this.$refs.controlChild.open()
+        this.$refs.controlChild.open();
       }
     },
-    disabled2() { // 是否禁用按钮
-      return ![0, 3, ''].includes(this.status)
+    disabled2() {
+      // 是否禁用按钮
+      return ![0, 3, ""].includes(this.status);
     },
     // 获取到当前选中国家的code值
     getName(params) {
-      console.log(params)
+      console.log(params);
       this.countryName = params[0];
       this.countryCode = params[1];
     },
     handleCommand(val) {
-      console.log(val)
-      this.loginForm.religionCode = val
-      localStorage.setItem('religionCode', val)
+      console.log(val);
+      this.loginForm.religionCode = val;
+      localStorage.setItem("religionCode", val);
     },
     handleChange(index) {
-      this.current = index
-      this.loginForm.username = ''
-      this.loginForm.phone = ''
-      this.loginForm.password = ''
+      this.current = index;
+      this.loginForm.username = "";
+      this.loginForm.phone = "";
+      this.loginForm.password = "";
     },
     onLogin() {
-      if (['HIVE'].includes(setting.projectTitle)) {
-        this.handleLogin()
+      if (["HIVE"].includes(setting.projectTitle)) {
+        this.handleLogin();
       } else {
         if (!this.loginForm.agree && !this.setting.hideLoginProtocol) {
-          this.$message.error(this.$t('请先同意商家规则'))
-          return
+          this.$message.error(this.$t("请先同意商家规则"));
+          return;
         }
-        this.isShowVerification = true
+        this.isShowVerification = true;
       }
     },
     onSuccess(msg) {
       // this.isShow = false; // 通过验证后，需要手动关闭模态框
-      this.handleLogin()
+      this.handleLogin();
     },
     onClose() {
-      console.log(22)
-      this.isShowVerification = false
+      console.log(22);
+      this.isShowVerification = false;
     },
     clearPassword(value) {
-      this.loginForm.password = value
+      this.loginForm.password = value;
     },
     checkCapslock(e) {
-      const {key} = e
-      this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
+      const { key } = e;
+      this.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
     },
     showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
+      if (this.passwordType === "password") {
+        this.passwordType = "";
       } else {
-        this.passwordType = 'password'
+        this.passwordType = "password";
       }
       this.$nextTick(() => {
-        this.$refs.password.focus()
-      })
+        this.$refs.password.focus();
+      });
     },
     handleLogin() {
-      const t = this
-      this.isShowVerification = false
+      const t = this;
+      this.isShowVerification = false;
       if (this.loading) {
-        return
+        return;
       }
-      if (this.current === 0 && this.loginForm.username === '') {
-        this.$message.error(this.$t('请输入邮箱'))
-        return
+      if (this.current === 0 && this.loginForm.username === "") {
+        this.$message.error(this.$t("请输入邮箱"));
+        return;
       }
-      if (this.current === 1 && this.loginForm.phone === '') {
-        this.$message.error(this.$t('请输入手机号'))
-        return
+      if (this.current === 1 && this.loginForm.phone === "") {
+        this.$message.error(this.$t("请输入手机号"));
+        return;
       }
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          t.loading = true
-          let loginForm = {}
+          t.loading = true;
+          let loginForm = {};
           if (t.current === 0) {
             loginForm = {
               password: t.loginForm.password,
               username: t.loginForm.username,
-              type :"2",
-              roleType:Number(1),
-            }
+              type: "2",
+              roleType: Number(1)
+            };
           } else if (t.current === 1) {
             //角色类型0用户端1商家端 登陆类型1手机2邮箱
             loginForm = {
               password: t.loginForm.password,
-              username: t.loginForm.religionCode + ' ' + t.loginForm.phone,
-              type :"1",
-              roleType:Number(1),
-            }
+              username: t.loginForm.religionCode + " " + t.loginForm.phone,
+              type: "1",
+              roleType: Number(1)
+            };
           }
-          login2(loginForm).then((e) => {
-            console.log(e.data.token)
-            setToken(e.data.token)
-            let redirect = this.$route.query.redirect
-            if (redirect) {
-              this.$router.push({path: redirect, query: t.otherQuery})
-            } else {
-              t.$router.push({path: '/', query: t.otherQuery})
-            }
-            t.loading = false
-            t.isShowVerification = false
-          }).catch((e) => {
-            t.loading = false
-            t.isShowVerification = false
-            console.log('错误', e)
-          })
+          login2(loginForm)
+            .then(e => {
+              console.log(e.data.token);
+              setToken(e.data.token);
+              let redirect = this.$route.query.redirect;
+              if (redirect) {
+                this.$router.push({ path: redirect, query: t.otherQuery });
+              } else {
+                t.$router.push({ path: "/", query: t.otherQuery });
+              }
+              t.loading = false;
+              t.isShowVerification = false;
+            })
+            .catch(e => {
+              t.loading = false;
+              t.isShowVerification = false;
+              console.log("错误", e);
+            });
         } else {
-          console.log('error submit!!')
-          return false
+          console.log("error submit!!");
+          return false;
         }
-      })
+      });
     },
     loginFree(token) {
-      loginFree({token}).then((e) => {
-        setToken(e.data.token)
-        let redirect = this.$route.query.redirect
-        if (redirect) {
-          this.$router.push({path: redirect, query: this.otherQuery})
-        } else {
-          this.$router.push({path: '/', query: this.otherQuery})
-        }
-      }).catch((e) => {
-        console.log('错误', e)
-      })
+      loginFree({ token })
+        .then(e => {
+          setToken(e.data.token);
+          let redirect = this.$route.query.redirect;
+          if (redirect) {
+            this.$router.push({ path: redirect, query: this.otherQuery });
+          } else {
+            this.$router.push({ path: "/", query: this.otherQuery });
+          }
+        })
+        .catch(e => {
+          console.log("错误", e);
+        });
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
-        if (cur !== 'redirect') {
-          acc[cur] = query[cur]
+        if (cur !== "redirect") {
+          acc[cur] = query[cur];
         }
-        return acc
-      }, {})
+        return acc;
+      }, {});
     },
     handleLoginMethod(method) {
-      this.loginMethod = method
-      this.loginForm.username = ''
-      this.loginForm.password = ''
+      this.loginMethod = method;
+      this.loginForm.username = "";
+      this.loginForm.password = "";
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -487,7 +582,7 @@ export default {
 
 ::v-deep {
   .el-dropdown {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   .el-input__inner {
@@ -509,9 +604,10 @@ export default {
   align-items: center;
 
   ::v-deep {
-    .el-textarea__inner, .el-input__inner {
+    .el-textarea__inner,
+    .el-input__inner {
       background: transparent !important;
-      color: #FFFFFF;
+      color: #ffffff;
       height: 50px;
     }
   }
@@ -535,24 +631,24 @@ export default {
     }
 
     .shop-name {
-      font-family: 'Roboto';
+      font-family: "Roboto";
       font-style: normal;
       height: 30px;
       line-height: 30px;
       font-weight: 600;
       font-size: 30px;
-      color: #FFFFFF;
+      color: #ffffff;
       margin: 12px;
     }
 
     .shop-text {
-      font-family: 'Roboto';
+      font-family: "Roboto";
       font-style: normal;
       font-weight: 400;
       font-size: 24px;
       line-height: 28px;
       text-align: center;
-      color: #C4C4C4;
+      color: #c4c4c4;
       margin-top: 30px;
     }
 
@@ -563,26 +659,25 @@ export default {
         align-items: center;
 
         .login-tab-item {
-
           text-align: center;
           margin: 24px 65px;
-          font-family: 'Roboto';
+          font-family: "Roboto";
           font-style: normal;
           font-weight: 400;
           font-size: 14px;
           line-height: 16px;
-          color: #FFFFFF;
+          color: #ffffff;
           cursor: pointer;
           padding: 0 12px;
 
           &.active {
-            color: #3E73FF;
+            color: #3e73ff;
             position: relative;
 
             &::after {
               position: absolute;
-              content: '';
-              background-color: #3E73FF;
+              content: "";
+              background-color: #3e73ff;
               width: 100%;
               height: 2px;
               left: 0;
@@ -599,7 +694,6 @@ export default {
           margin-bottom: 24px;
           position: relative;
 
-
           .input-icon {
             position: absolute;
             left: 12px;
@@ -612,8 +706,6 @@ export default {
 
           &.password {
             position: relative;
-
-
           }
         }
 

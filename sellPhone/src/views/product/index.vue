@@ -11,38 +11,47 @@
         <template #left-icon="icon">
           <img class="search-icon" src="@/assets/imgs/product/search-icon.png" />
         </template>
-    </van-search>
+      </van-search>
     </div>
-    
 
     <div class="flex ml-4 mr-4 product-header">
       <div class="flex-1 text-center after" @click="openCommodits">
         <div class="moeny icon" v-if="hideProNum">
-          <img :src="getImg('image/order/diamond.svg')" alt="">
+          <img :src="getImg('image/order/diamond.svg')" alt />
         </div>
         <div v-else class="moeny">{{ numberStrFormat(systemGoodsNum, 0) }}</div>
-        <div class="title">{{ $t('商品库') }}<van-icon name="arrow" /></div>
+        <div class="title">
+          {{ $t('商品库') }}
+          <van-icon name="arrow" />
+        </div>
       </div>
       <div class="flex-1 text-center" @click="openComment">
         <div class="moeny">{{ evaluations }}</div>
-        <div class="title">{{ $t('评论') }}<van-icon name="arrow" /></div>
+        <div class="title">
+          {{ $t('评论') }}
+          <van-icon name="arrow" />
+        </div>
       </div>
     </div>
-    <div class="hot-title ml-4 mr-4 mt-4 mb-4">
-      {{ $t('店铺产品') }}({{ numberStrFormat(sellerGoodsNum, 0) }})
-    </div>
+    <div
+      class="hot-title ml-4 mr-4 mt-4 mb-4"
+    >{{ $t('店铺产品') }}({{ numberStrFormat(sellerGoodsNum, 0) }})</div>
     <div class="list ml-4 mr-4 mt-4 mb-4 list-content" :class="{'is-ar': isArLang}">
       <van-pull-refresh
         v-model="refreshing"
         @refresh="onRefresh"
-        :loading-text="$t('加载中')" :loosing-text="$t('释放以刷新')" :pulling-text="$t('下拉以刷新')">
+        :loading-text="$t('加载中')"
+        :loosing-text="$t('释放以刷新')"
+        :pulling-text="$t('下拉以刷新')"
+      >
         <van-list
           ref="vanList"
           v-model:loading="loading"
           :loading-text="$t('加载中')"
           :finished="finished"
           :finished-text="$t('noMore')"
-          @load="onLoad">
+          @load="onLoad"
+        >
           <div
             class="item pl-3 pr-3 pb-3 pt-3 flex"
             @click="getdDtails(item)"
@@ -50,32 +59,34 @@
             :class="{'goods-removed': item.isShelf / 1 === 0}"
             :key="index"
           >
-            <div class="flex-1 flex left" >
-              <div class="product-img-wrap w-20 h-20 ">
+            <div class="flex-1 flex left">
+              <div class="product-img-wrap w-20 h-20">
                 <img class="product-img" :src="item.imgUrl1" />
                 <div v-if="item.isShelf / 1 === 0" class="take_off">{{$t('已下架')}}</div>
-<!--                <div class="delete-wrap" @click.stop="deleteGood(item)">-->
-<!--                  {{ $t('删除') }}-->
-<!--                </div>-->
+                <!--                <div class="delete-wrap" @click.stop="deleteGood(item)">-->
+                <!--                  {{ $t('删除') }}-->
+                <!--                </div>-->
               </div>
               <div class="product-info flex-1">
                 <div class="name-content">
                   <p>{{ item.name }}</p>
                   <div class="more" @click.stop="openEdit(item)">
-                    <img
-                      class="more-icon"
-                      src="@/assets/imgs/product/more.png"
-                    />
+                    <img class="more-icon" src="@/assets/imgs/product/more.png" />
                   </div>
                 </div>
                 <!-- <div class="name">{{ item.name }}</div> -->
                 <div class="Specification">
                   <span>{{ item.categoryName }}</span>
-                  <span style="margin-left: 20px">{{ $t('销量') }}: {{ numberStrFormat(item.soldNum, 0) }}</span>
+                  <span
+                    style="margin-left: 20px"
+                  >{{ $t('销量') }}: {{ numberStrFormat(item.soldNum, 0) }}</span>
                 </div>
                 <div class="money-content">
                   <p>${{ numberStrFormat(item.sellingPrice) }}</p>
-                  <p v-if="item.discountPrice" class="dis">{{$t('折扣价')}} ${{ numberStrFormat(item.discountPrice) }}</p>
+                  <p
+                    v-if="item.discountPrice"
+                    class="dis"
+                  >{{$t('折扣价')}} ${{ numberStrFormat(item.discountPrice) }}</p>
                 </div>
               </div>
             </div>
@@ -85,7 +96,7 @@
                 @click.stop="openEdit(item)"
                 src="@/assets/imgs/product/more.png"
               />
-            </div> -->
+            </div>-->
           </div>
         </van-list>
       </van-pull-refresh>
@@ -95,8 +106,12 @@
 </template>
 
 <script setup name="ProductIndex">
-import {onMounted, computed, ref, onActivated} from 'vue'
-import { merchantGoodsList, sellerGoodsdelete, sysParaProductInfo } from '@/service/product.api'
+import { onMounted, computed, ref, onActivated } from 'vue'
+import {
+  merchantGoodsList,
+  sellerGoodsdelete,
+  sysParaProductInfo
+} from '@/service/product.api'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { Toast, Dialog } from 'vant'
@@ -127,25 +142,26 @@ const hideProNum = computed(() => {
   return ['int'].includes(mode)
 })
 
-const deleteGood = (item) => {  // 删除商家自己的商品（假删除）
+const deleteGood = (item) => {
+  // 删除商家自己的商品（假删除）
   Dialog.confirm({
     title: '提示',
     message: '确认删除吗？'
   })
-      .then(() => {
-        sellerGoodsdelete({ sellerGoodsId: item.id }).then(() => {
-          // onLoad()
-          // onRefresh()
-          Toast('操作成功')
-          const index = list.value.findIndex((item2) => item2.id === item.id)
-          if (index) {
-            list.value.splice(index, 1)
-          }
-        })
+    .then(() => {
+      sellerGoodsdelete({ sellerGoodsId: item.id }).then(() => {
+        // onLoad()
+        // onRefresh()
+        Toast('操作成功')
+        const index = list.value.findIndex((item2) => item2.id === item.id)
+        if (index) {
+          list.value.splice(index, 1)
+        }
       })
-      .catch(() => {
-        // on cancel
-      })
+    })
+    .catch(() => {
+      // on cancel
+    })
 }
 
 const firstLoading = ref(true)
@@ -159,7 +175,7 @@ onActivated(() => {
 
     const currentProductId = sessionStorage.getItem('currentProductId')
     if (currentProductId) {
-      const index = list.value.findIndex(item => item.id === currentProductId)
+      const index = list.value.findIndex((item) => item.id === currentProductId)
       if (sessionStorage.getItem('productDelete')) {
         list.value.splice(index, 1)
         sellerGoodsNum.value -= 1
@@ -196,7 +212,8 @@ const onLoad = (flag) => {
     if (flag) {
       list.value = res.pageList || []
     } else {
-      list.value = pageNum.value === 1 ? res.pageList : [...list.value, ...res.pageList]
+      list.value =
+        pageNum.value === 1 ? res.pageList : [...list.value, ...res.pageList]
     }
 
     finished.value = list.value.length >= res.sellerGoodsNum
@@ -231,7 +248,7 @@ const close = () => {
 
 const sysParaMin = ref('')
 const sysParaMax = ref('')
-sysParaProductInfo().then(res => {
+sysParaProductInfo().then((res) => {
   sysParaMin.value = res.sysParaMin
   sysParaMax.value = res.sysParaMax
 })
@@ -239,7 +256,10 @@ sysParaProductInfo().then(res => {
 const openEdit = (item) => {
   item.sysParaMin = sysParaMin.value
   item.sysParaMax = sysParaMax.value
-  router.push({ path: '/productPage/productEdit', query: { item: JSON.stringify(item) } })
+  router.push({
+    path: '/productPage/productEdit',
+    query: { item: JSON.stringify(item) }
+  })
   // isEdit.value = true
   productInfo.value = item
 }
@@ -252,7 +272,6 @@ onMounted(() => {
     onRefresh()
   })
 })
-
 </script>
 
 <style scoped lang="scss">
@@ -420,7 +439,7 @@ onMounted(() => {
             font-weight: 400;
             > .dis {
               font-size: 14px;
-              color: #FF3E3E;
+              color: #ff3e3e;
             }
           }
         }

@@ -73,6 +73,14 @@ export const logoData = [
     )
   },
   {
+    name: 'tikTok',
+    key: 'tiktok',
+    logo: new URL(
+      '@/assets/image/logo/tiktok-wholesale_app.png',
+      import.meta.url
+    )
+  },
+  {
     name: 'AntMall',
     key: 'antMall',
     logo: new URL('@/assets/image/logo/antMall_app.png', import.meta.url)

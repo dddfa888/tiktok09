@@ -1131,5 +1131,6 @@ export default {
 	"等待确认":"TO BE CONFIRMED",
 	"上传图片":"upload pictures",
 "从相册选择":"Choose from album",
-    "拍照":"take a photo"
+    "拍照":"take a photo",
+    "累计收益":"Cumulative income"
 };

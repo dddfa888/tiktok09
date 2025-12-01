@@ -1130,5 +1130,6 @@ export default {
 	"等待确认":"Confirmación pendiente",
 	"上传图片":"Subir fotos",
 "从相册选择":"Seleccionar desde la galería",
-    "拍照":"Tomar una foto"
+    "拍照":"Tomar una foto",
+    "累计收益":"Ingresos acumulados"
 };

@@ -14,7 +14,7 @@
       <!-- <p class="name">{{ sellerData?.name || 'Store Name' }}</p> -->
       <div class="name-content">
         <p>{{ sellerData?.name || 'Store Name' }}</p>
-        <img v-if="currentLevel && showLevelIcon" :src="levleIcon[currentLevel]" alt />
+        <!--<img v-if="currentLevel && showLevelIcon" :src="levleIcon[currentLevel]" alt />-->
       </div>
       <div class="enter" :class="{ 'is-ar': isArLang }">
         <img :src="images.service.href" alt @click="isShow" />

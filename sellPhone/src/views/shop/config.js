@@ -43,7 +43,6 @@ export const visitorsData = [
     icon: new URL('@/assets/image/shop/icon_28.png', import.meta.url)
   },
   {
-
     title: '预计利润',
     number: 0,
     decimals: 2,
@@ -62,11 +61,11 @@ export const navData = [
   //   icon: new URL('@/assets/image/shop/icon_16.png', import.meta.url),
   //   href: '/refundRequest'
   // },
-  {
-    title: 'throughCar',
-    icon: new URL('@/assets/image/shop/icon_04.png', import.meta.url),
-    href: '/shop/marketing'
-  },
+  // {
+  //   title: 'throughCar',
+  //   icon: new URL('@/assets/image/shop/icon_04.png', import.meta.url),
+  //   href: '/shop/marketing'
+  // },
   // {
   //   title: 'shopPromotion',
   //   icon: new URL('@/assets/image/shop/icon_17.png', import.meta.url),
@@ -156,7 +155,7 @@ export const statBlockData = [
     title: '已到货',
     number: 0,
     color: '#3FBC8F'
-  },
+  }
 ]
 
 export const promotionData = [
